@@ -1,0 +1,59 @@
+{
+    "menu": [
+        {
+            "url": "home",
+            "name": "Home",
+            "icon": "home",
+            "slug": "home"
+        },
+        {
+            "name": "Blogs",
+            "icon": "book",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "categories",
+                    "name": "Categories",
+                    "icon": "circle",
+                    "slug": "categories"
+                },
+                {
+                    "url": "blogs",
+                    "name": "Blogs",
+                    "icon": "circle",
+                    "slug": "blogs"
+                }
+            ]
+        },
+        {
+            "url": "users",
+            "name": "User Management",
+            "icon": "user",
+            "slug": "users"
+        },
+        {   "url": "file-manager",
+            "name": "File Management",
+            "icon": "save",
+            "slug": "app-file-manager"
+        },
+        {
+            "name": "Roles & Permissions",
+            "icon": "shield",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "access/roles",
+                    "name": "Roles",
+                    "icon": "circle",
+                    "slug": "app-access-roles"
+                },
+                {
+                    "url": "access/permissions",
+                    "name": "Permission",
+                    "icon": "circle",
+                    "slug": "app-access-permission"
+                }
+            ]
+        }
+    ]
+}
