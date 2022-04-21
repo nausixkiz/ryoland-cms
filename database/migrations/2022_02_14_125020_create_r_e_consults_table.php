@@ -18,8 +18,14 @@ return new class extends Migration
             $table->string('name', 120);
             $table->string('email', 60);
             $table->string('phone', 60);
-            $table->uuid('project_uuid');
-            $table->uuid('property_uuid');
+            $table->foreignId('project_id')
+                ->constrained('r_e_projects')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('property_id')
+                ->constrained('r_e_properties')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->text('content')->nullable();
             $table->string('status', 60)->default('unread');
             $table->timestamps();

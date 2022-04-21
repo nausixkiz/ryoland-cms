@@ -188,7 +188,8 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary me-1 data-submit">{{ __('Submit') }}</button>
-                            <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                            <button type="reset" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">{{ __('Cancel') }}</button>
                         </div>
                     </form>
                 </div>

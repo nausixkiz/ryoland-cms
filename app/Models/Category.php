@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasFeatured;
+use App\Traits\HasStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +16,8 @@ class Category extends Model
     use HasFactory;
     use Sluggable;
     use SluggableScopeHelpers;
+    use HasStatus;
+    use HasFeatured;
 
     protected $fillable = ['name', 'description', 'icon', 'is_featured', 'is_default', 'status'];
 
@@ -31,18 +35,18 @@ class Category extends Model
         ];
     }
 
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName(): string
+    public function user(): BelongsTo
     {
-        return 'slug';
+        return $this->belongsTo(User::class);
     }
 
     public function blogs() : HasMany
     {
         return $this->hasMany(Blog::class);
+    }
+
+    public function default(): bool
+    {
+        return $this->is_default === 1;
     }
 }

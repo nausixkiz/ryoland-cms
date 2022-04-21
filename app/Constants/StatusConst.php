@@ -14,5 +14,10 @@ class StatusConst
     public const DRAFT = 'draft';
     public const PENDING = 'pending';
 
-    public const LIST_STATUS = [ self::PUBLISHED, self::DRAFT, self::PENDING ];
+    public const LIST_STATUS = [self::PUBLISHED, self::DRAFT, self::PENDING];
+
+    public static function getAllListStatus()
+    {
+        return self::LIST_STATUS;
+    }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('r_e_investors', function (Blueprint $table) {
             $table->id();
             $table->string('name', 120);
+            $table->string('slug');
             $table->string('status', 60)->default('published');
             $table->timestamps();
         });

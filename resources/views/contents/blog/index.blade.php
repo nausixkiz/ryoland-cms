@@ -26,7 +26,7 @@
                                 <div class="col-md-4">
                                     <label class="form-label" for="blog-status">Status</label>
                                     <select id="blog-status" class="form-select text-capitalize mb-md-0 mb-2">
-                                        <option value=""> Select Status </option>
+                                        <option value=""> Select Status</option>
                                         @foreach(\App\Constants\StatusConst::LIST_STATUS as $status)
                                             <option value="{{ $status }}" class="text-capitalize">{{ $status }}</option>
                                         @endforeach
@@ -58,13 +58,15 @@
                                         <td>{{ $blog->id }}</td>
                                         <td>{{ $blog->name }}</td>
                                         <td>@if($blog->hasThumbnail())
-                                                <img src="{{ $blog->getThumbnailUrl() }}" alt="{{ $blog->name }}" width="50" height="50"> @endif</td>
+                                                <img src="{{ $blog->getThumbnailUrl() }}" alt="{{ $blog->name }}"
+                                                     width="50" height="50">
+                                            @endif</td>
                                         <td>{{ $blog->slug }}</td>
                                         <td>
                                         <span class="badge rounded-pill text-capitalize
-                                            @if($blog->status == \App\Constants\StatusConst::PUBLISHED) badge-light-success @endif
-                                            @if($blog->status == \App\Constants\StatusConst::DRAFT) badge-light-secondary @endif
-                                            @if($blog->status == \App\Constants\StatusConst::PENDING) badge-light-warning @endif
+                                            @if($blog->isPublished()) badge-light-success @endif
+                                            @if($blog->isDraft()) badge-light-secondary @endif
+                                            @if($blog->isPending()) badge-light-warning @endif
                                             text-capitalized">
                                             {{ $blog->status }}
                                         </span>
@@ -74,14 +76,17 @@
                                         <td>{{ $blog->updated_at->diffForHumans() }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a class="btn btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <a class="btn btn-sm dropdown-toggle hide-arrow"
+                                                   data-bs-toggle="dropdown">
                                                     <i class="font-small-4" data-feather="more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a href="{{ \Illuminate\Support\Facades\Config::get('app.main_url') . '/news/' .  $blog->slug }}" class="dropdown-item">
+                                                    <a href="{{ \Illuminate\Support\Facades\Config::get('app.main_url') . '/news/' .  $blog->slug }}"
+                                                       class="dropdown-item">
                                                         <em data-feather="eye" class="font-small-4 me-50"></em> View
                                                     </a>
-                                                    <a href="{{ route('blogs.edit', $blog->slug) }}" class="dropdown-item">
+                                                    <a href="{{ route('blogs.edit', $blog->slug) }}"
+                                                       class="dropdown-item">
                                                         <em data-feather="edit" class="font-small-4 me-50"></em> Edit
                                                     </a>
                                                     <a href="javascript:void(0)" class="dropdown-item"
@@ -91,7 +96,8 @@
                                                         Delete
                                                     </a>
                                                     <form id="{{ 'delete-blog-' . $blog->slug }}"
-                                                          action="{{ route('blogs.destroy', $blog->slug) }}" method="POST"
+                                                          action="{{ route('blogs.destroy', $blog->slug) }}"
+                                                          method="POST"
                                                           class="d-none" hidden>
                                                         @method('DELETE')
                                                         @csrf
@@ -144,37 +150,37 @@
                 {
                     extend: 'collection',
                     className: 'btn btn-outline-secondary dropdown-toggle me-2',
-                    text: feather.icons['share'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
+                    text: feather.icons['share'].toSvg({class: 'font-small-4 me-50'}) + 'Export',
                     buttons: [
                         {
                             extend: 'print',
-                            text: feather.icons['printer'].toSvg({ class: 'font-small-4 me-50' }) + 'Print',
+                            text: feather.icons['printer'].toSvg({class: 'font-small-4 me-50'}) + 'Print',
                             className: 'dropdown-item',
-                            exportOptions: { columns: [3, 4, 5, 6, 7] }
+                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
                         },
                         {
                             extend: 'csv',
-                            text: feather.icons['file-text'].toSvg({ class: 'font-small-4 me-50' }) + 'Csv',
+                            text: feather.icons['file-text'].toSvg({class: 'font-small-4 me-50'}) + 'Csv',
                             className: 'dropdown-item',
-                            exportOptions: { columns: [3, 4, 5, 6, 7] }
+                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
                         },
                         {
                             extend: 'excel',
-                            text: feather.icons['file'].toSvg({ class: 'font-small-4 me-50' }) + 'Excel',
+                            text: feather.icons['file'].toSvg({class: 'font-small-4 me-50'}) + 'Excel',
                             className: 'dropdown-item',
-                            exportOptions: { columns: [3, 4, 5, 6, 7] }
+                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
                         },
                         {
                             extend: 'pdf',
-                            text: feather.icons['clipboard'].toSvg({ class: 'font-small-4 me-50' }) + 'Pdf',
+                            text: feather.icons['clipboard'].toSvg({class: 'font-small-4 me-50'}) + 'Pdf',
                             className: 'dropdown-item',
-                            exportOptions: { columns: [3, 4, 5, 6, 7] }
+                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
                         },
                         {
                             extend: 'copy',
-                            text: feather.icons['copy'].toSvg({ class: 'font-small-4 me-50' }) + 'Copy',
+                            text: feather.icons['copy'].toSvg({class: 'font-small-4 me-50'}) + 'Copy',
                             className: 'dropdown-item',
-                            exportOptions: { columns: [3, 4, 5, 6, 7] }
+                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
                         }
                     ],
                     init: function (api, node, config) {
@@ -247,16 +253,21 @@
                         return ''
                     }
                 },
+                {
+                    className: 'text-center',
+                    orderable: false,
+                    targets: 9,
+                }
             ],
             order: [[1, 'desc']],
-            initComplete : function(settings, json) {
+            initComplete: function (settings, json) {
                 const table = settings.oInstance.api();
-                table.columns(4).every( function () {
+                table.columns(4).every(function () {
                     const column = this;
                     $('#blog-status').on('change', function () {
-                            const val = $.fn.dataTable.util.escapeRegex($(this).val());
-                            column.search(val, true, false).draw()
-                        });
+                        const val = $.fn.dataTable.util.escapeRegex($(this).val());
+                        column.search(val, true, false).draw()
+                    });
                 });
             }
         });

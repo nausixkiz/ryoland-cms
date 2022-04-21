@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/monokai-sublime.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/quill.snow.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/quill.bubble.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/jquery-tagsinput-revisited/jquery.tagsinput-revisited.min.css')) }}">
+    <link rel="stylesheet"
+          href="{{ asset(mix('vendors/css/jquery-tagsinput-revisited/jquery.tagsinput-revisited.min.css')) }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto+Slab&family=Slabo+27px&family=Sofia&family=Ubuntu+Mono&display=swap"
@@ -83,13 +84,16 @@
                                                 alt="Blog Thumbnail"
                                             />
                                             <div class="featured-info">
-                                                <small class="@if($errors->has('thumbnail')) text-danger @else text-muted @endif">Required image resolution 800x400, image size
+                                                <small
+                                                    class="@if($errors->has('thumbnail')) text-danger @else text-muted @endif">Required
+                                                    image resolution 800x400, image size
                                                     10mb.</small>
                                                 <p class="my-50">
                                                     <span id="blog-thumbnail-text"></span>
                                                 </p>
                                                 <div class="d-inline-block">
-                                                    <input class="form-control @error('thumbnail') is-invalid @enderror" type="file" id="blog-thumbnail"
+                                                    <input class="form-control @error('thumbnail') is-invalid @enderror"
+                                                           type="file" id="blog-thumbnail"
                                                            accept="image/*" name="thumbnail" required/>
                                                 </div>
                                             </div>
@@ -130,26 +134,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Status</h4>
-                                </div>
-                                <div class="card-body">
-                                    <select class="select2 form-select @error('status') is-invalid @enderror"
-                                            id="status" name="status" required>
-                                        <option value="published">Published</option>
-                                        <option value="draft">Draft</option>
-                                        <option value="pending">Pending</option>
-                                    </select>
-                                    @error('status')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
+                        @include('contents._widgets.form.select-status-widget', ['itemStatus' => old('status')])
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -158,7 +143,8 @@
                                 <div class="card-body">
                                     <input type="checkbox"
                                            class="form-check-input @error('is_featured') is-invalid @enderror"
-                                           id="is_featured" name="is_featured" @if(old('is_featured') == 'on') checked @endif/>
+                                           id="is_featured" name="is_featured"
+                                           @if(old('is_featured') == 'on') checked @endif/>
                                     <label class="form-check-label" for="is_featured">Feature Blog</label>
                                     @error('is_featured')
                                     <span class="invalid-feedback" role="alert">

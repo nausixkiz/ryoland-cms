@@ -170,6 +170,7 @@ return [
          * Package Service Providers...
          */
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
+        Torann\Currency\CurrencyServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -200,6 +201,7 @@ return [
         'Avatar' => Laravolt\Avatar\Facade::class,
         'ThemeHelper' => App\Helpers\ThemeHelpers::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Currency' => Torann\Currency\Facades\Currency::class,
     ])->toArray(),
 
 ];

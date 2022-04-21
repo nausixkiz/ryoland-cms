@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 120);
             $table->string('icon', 60)->nullable();
-            $table->string('distance', 255)->default('0.00');
+            $table->string('distance')->default('0.00');
             $table->string('status', 60)->default('published');
             $table->timestamps();
         });

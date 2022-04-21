@@ -1,9 +1,9 @@
 @extends('layouts.contentLayoutMaster')
 @php
-$breadcrumbs = [['link' => 'home', 'name' => 'Home'], ['name' => 'Create Team']];
+    $breadcrumbs = [['link' => 'home', 'name' => 'Home'], ['name' => 'Create Team']];
 @endphp
 @section('title', 'Create Team')
 
 @section('content')
-  @livewire('teams.create-team-form')
+    @livewire('teams.create-team-form')
 @endsection

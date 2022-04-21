@@ -23,43 +23,44 @@
     <!-- Role cards -->
     <div class="row">
         @foreach($listRoles as $role)
-        <div class="col-xl-4 col-lg-6 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <span>Total {{ $role['userCount'] }} users</span>
-                        @if($role['userCount'] > 0)
-                            <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
-                                @foreach($role['userList'] as $user)
-                                    <li
-                                        data-bs-toggle="tooltip"
-                                        data-popup="tooltip-custom"
-                                        data-bs-placement="top"
-                                        title="{{ $user->name }}"
-                                        class="avatar avatar-sm pull-up"
-                                    >
-                                        <img class="rounded-circle" src="{{ Avatar::create($user->name)->toBase64() }}"
-                                             alt="{{ $user->name }}"/>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </div>
-                    <div class="d-flex justify-content-between align-items-end mt-1 pt-25">
-                        <div class="role-heading">
-                            <h4 class="fw-bolder">{{ $role['name'] }}</h4>
-                            <a href="javascript:" class="role-edit-modal" data-bs-toggle="modal"
-                               data-bs-target="#addRoleModal">
-                                <small class="fw-bolder">{{ __('Edit Role') }}</small>
+            <div class="col-xl-4 col-lg-6 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <span>Total {{ $role['userCount'] }} users</span>
+                            @if($role['userCount'] > 0)
+                                <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
+                                    @foreach($role['userList'] as $user)
+                                        <li
+                                            data-bs-toggle="tooltip"
+                                            data-popup="tooltip-custom"
+                                            data-bs-placement="top"
+                                            title="{{ $user->name }}"
+                                            class="avatar avatar-sm pull-up"
+                                        >
+                                            <img class="rounded-circle"
+                                                 src="{{ Avatar::create($user->name)->toBase64() }}"
+                                                 alt="{{ $user->name }}"/>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </div>
+                        <div class="d-flex justify-content-between align-items-end mt-1 pt-25">
+                            <div class="role-heading">
+                                <h4 class="fw-bolder">{{ $role['name'] }}</h4>
+                                <a href="javascript:" class="role-edit-modal" data-bs-toggle="modal"
+                                   data-bs-target="#addRoleModal">
+                                    <small class="fw-bolder">{{ __('Edit Role') }}</small>
+                                </a>
+                            </div>
+                            <a href="javascript:void(0);" class="text-body">
+                                <i data-feather="copy" class="font-medium-5"></i>
                             </a>
                         </div>
-                        <a href="javascript:void(0);" class="text-body">
-                            <i data-feather="copy" class="font-medium-5"></i>
-                        </a>
                     </div>
                 </div>
             </div>
-        </div>
         @endforeach
         <div class="col-xl-4 col-lg-6 col-md-6">
             <div class="card">
@@ -91,30 +92,30 @@
             </div>
         </div>
     </div>
-{{--    <!--/ Role cards -->--}}
+    {{--    <!--/ Role cards -->--}}
 
-{{--    <h3 class="mt-50">Total users with their roles</h3>--}}
-{{--    <p class="mb-2">Find all of your company’s administrator accounts and their associate roles.</p>--}}
-{{--    <!-- table -->--}}
-{{--    <div class="card">--}}
-{{--        <div class="table-responsive">--}}
-{{--            <table class="user-list-table table">--}}
-{{--                <thead class="table-light">--}}
-{{--                <tr>--}}
-{{--                    <th></th>--}}
-{{--                    <th></th>--}}
-{{--                    <th>Name</th>--}}
-{{--                    <th>Role</th>--}}
-{{--                    <th>Plan</th>--}}
-{{--                    <th>Billing</th>--}}
-{{--                    <th>Status</th>--}}
-{{--                    <th>Actions</th>--}}
-{{--                </tr>--}}
-{{--                </thead>--}}
-{{--            </table>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <!-- table -->--}}
+    {{--    <h3 class="mt-50">Total users with their roles</h3>--}}
+    {{--    <p class="mb-2">Find all of your company’s administrator accounts and their associate roles.</p>--}}
+    {{--    <!-- table -->--}}
+    {{--    <div class="card">--}}
+    {{--        <div class="table-responsive">--}}
+    {{--            <table class="user-list-table table">--}}
+    {{--                <thead class="table-light">--}}
+    {{--                <tr>--}}
+    {{--                    <th></th>--}}
+    {{--                    <th></th>--}}
+    {{--                    <th>Name</th>--}}
+    {{--                    <th>Role</th>--}}
+    {{--                    <th>Plan</th>--}}
+    {{--                    <th>Billing</th>--}}
+    {{--                    <th>Status</th>--}}
+    {{--                    <th>Actions</th>--}}
+    {{--                </tr>--}}
+    {{--                </thead>--}}
+    {{--            </table>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
+    {{--    <!-- table -->--}}
 
     @include('_partials._modals.modal-add-role')
 @endsection

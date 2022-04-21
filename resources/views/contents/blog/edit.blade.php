@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/monokai-sublime.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/quill.snow.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/quill.bubble.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/jquery-tagsinput-revisited/jquery.tagsinput-revisited.min.css')) }}">
+    <link rel="stylesheet"
+          href="{{ asset(mix('vendors/css/jquery-tagsinput-revisited/jquery.tagsinput-revisited.min.css')) }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto+Slab&family=Slabo+27px&family=Sofia&family=Ubuntu+Mono&display=swap"
@@ -88,13 +89,16 @@
                                                 alt="{{ $blog->name }} Thumbnail"
                                             />
                                             <div class="featured-info">
-                                                <small class="@if($errors->has('thumbnail')) text-danger @else text-muted @endif">Required image resolution 800x400, image size
+                                                <small
+                                                    class="@if($errors->has('thumbnail')) text-danger @else text-muted @endif">Required
+                                                    image resolution 800x400, image size
                                                     10mb.</small>
                                                 <p class="my-50">
                                                     <span id="blog-thumbnail-text"></span>
                                                 </p>
                                                 <div class="d-inline-block">
-                                                    <input class="form-control @error('thumbnail') is-invalid @enderror" type="file" id="blog-thumbnail"
+                                                    <input class="form-control @error('thumbnail') is-invalid @enderror"
+                                                           type="file" id="blog-thumbnail"
                                                            accept="image/*" name="thumbnail"/>
                                                 </div>
                                             </div>
@@ -103,7 +107,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <input type="hidden" name="contents" id="contents" value="{{ $blog->contents }}" hidden>
+                                    <input type="hidden" name="contents" id="contents" value="{{ $blog->contents }}"
+                                           hidden>
                                     <div class="mb-1">
                                         <div id="full-wrapper">
                                             <div id="full-container">
@@ -135,26 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Status</h4>
-                                </div>
-                                <div class="card-body">
-                                    <select class="select2 form-select @error('status') is-invalid @enderror"
-                                            id="status" name="status" required>
-                                        <option value="published" @if($blog->status == 'published') selected @endif>Published</option>
-                                        <option value="draft" @if($blog->status == 'draft') selected @endif>Draft</option>
-                                        <option value="pending" @if($blog->status == 'pending') selected @endif>Pending</option>
-                                    </select>
-                                    @error('status')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
+                        @include('contents._widgets.form.select-status-widget', ['itemStatus' => old('status', $blog->status)])
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -163,7 +149,8 @@
                                 <div class="card-body">
                                     <input type="checkbox"
                                            class="form-check-input @error('is_featured') is-invalid @enderror"
-                                           id="is_featured" name="is_featured" @if(old('is_featured') == 'on' || $blog->featured()) checked @endif/>
+                                           id="is_featured" name="is_featured"
+                                           @if(old('is_featured') == 'on' || $blog->featured()) checked @endif/>
                                     <label class="form-check-label" for="is_featured">Feature Blog</label>
                                     @error('is_featured')
                                     <span class="invalid-feedback" role="alert">
@@ -183,7 +170,8 @@
                                             id="category" name="category" required>
                                         @foreach($categories as $category)
                                             <option value="{{ $category->slug }}"
-                                                    data-icon="{{ $category->icon }}" @if($blog->category->slug == $category->slug) selected @endif>{{ $category->name }}</option>
+                                                    data-icon="{{ $category->icon }}"
+                                                    @if($blog->category->slug == $category->slug) selected @endif>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('category')
@@ -373,7 +361,7 @@
 
             }
 
-            const tags =  $('#tags');
+            const tags = $('#tags');
             tags.tagsInput({
                 'unique': true,
                 'minChars': 2,

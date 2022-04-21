@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 120);
             $table->string('abbreviation', 2);
+            $table->string('slug');
             $table->boolean('is_default')->default(false);
             $table->string('status', 60)->default('published');
             // Relationships

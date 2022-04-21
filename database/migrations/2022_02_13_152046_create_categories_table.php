@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 120);
-            $table->string('description', 400)->nullable();
-            $table->string('icon', 60)->nullable();
+            $table->string('name', 120)->unique();
+            $table->string('description')->nullable();
+            $table->string('icon', 60);
             $table->string('slug');
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_default')->default(false);

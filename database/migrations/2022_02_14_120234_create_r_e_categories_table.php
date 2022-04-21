@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('r_e_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 120);
-            $table->string('description', 400)->nullable();
-            $table->string('icon', 60)->nullable();
-            $table->string('slug')->nullable();
+            $table->string('description');
+            $table->string('slug');
             $table->string('status', 60)->default('published');
             $table->boolean('is_default')->default(false);
             $table->timestamps();

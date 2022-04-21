@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasStatus;
+use App\Traits\HasThumbnail;
 use Carbon\Carbon;
 use Conner\Tagging\Taggable;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -24,6 +26,8 @@ class Blog extends Model implements HasMedia, Viewable
     use Sluggable;
     use InteractsWithViews;
     use SluggableScopeHelpers;
+    use HasStatus;
+    use HasThumbnail;
 
     protected $table = 'blogs';
 
@@ -68,26 +72,6 @@ class Blog extends Model implements HasMedia, Viewable
     public function getRouteKeyName(): string
     {
         return 'slug';
-    }
-
-    public function getTemporaryUrl(string $fullFilePath,int $numberOfMinutes,string $disk)
-    {
-        return Storage::disk($disk)->temporaryUrl($fullFilePath,now()->addMinutes($numberOfMinutes));
-    }
-
-    public function getThumbnailUrl()
-    {
-        if($this->hasMedia('thumbnail'))
-        {
-            return $this->getFirstMedia('thumbnail')->getTemporaryUrl(Carbon::now()->addMinutes(5));
-        }
-
-        return null;
-    }
-
-    public function hasThumbnail()
-    {
-        return $this->hasMedia('thumbnail');
     }
 
     public function hasRelatedTags(): bool

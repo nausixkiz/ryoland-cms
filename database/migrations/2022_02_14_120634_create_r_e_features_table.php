@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name', 120);
             $table->string('icon', 60)->nullable();
-            $table->string('status', 60)->default('published');
             $table->timestamps();
         });
     }

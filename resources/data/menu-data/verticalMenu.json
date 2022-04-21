@@ -26,6 +26,92 @@
             ]
         },
         {
+            "url": "careers",
+            "name": "Careers",
+            "icon": "briefcase",
+            "slug": "careers"
+        },
+        {
+            "url": "real-estate/consults",
+            "name": "Consults",
+            "icon": "message-circle",
+            "slug": "consults"
+        },
+        {
+            "name": "Locations",
+            "icon": "globe",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "location/countries",
+                    "name": "Countries",
+                    "icon": "circle",
+                    "slug": "location/countries"
+                },
+                {
+                    "url": "location/states",
+                    "name": "States",
+                    "icon": "circle",
+                    "slug": "location/states"
+                },
+                {
+                    "url": "location/cities",
+                    "name": "Cities",
+                    "icon": "circle",
+                    "slug": "location/cities"
+                }
+            ]
+        },
+        {
+            "name": "Real Estate",
+            "icon": "map",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "real-estate/properties",
+                    "name": "Properties",
+                    "icon": "circle",
+                    "slug": "real-estate/properties"
+                },
+                {
+                    "url": "real-estate/projects",
+                    "name": "Projects",
+                    "icon": "circle",
+                    "slug": "real-estate/projects"
+                },
+                {
+                    "url": "real-estate/features",
+                    "name": "Features",
+                    "icon": "circle",
+                    "slug": "real-estate/features"
+                },
+                {
+                    "url": "real-estate/facilities",
+                    "name": "Facilities",
+                    "icon": "circle",
+                    "slug": "real-estate/facilities"
+                },
+                {
+                    "url": "real-estate/investors",
+                    "name": "Investors",
+                    "icon": "circle",
+                    "slug": "real-estate/investors"
+                },
+                {
+                    "url": "real-estate/categories",
+                    "name": "Categories",
+                    "icon": "circle",
+                    "slug": "real-estate/categories"
+                }
+            ]
+        },
+        {
+            "url": "payments",
+            "name": "Payments",
+            "icon": "credit-card",
+            "slug": "payments"
+        },
+        {
             "url": "users",
             "name": "User Management",
             "icon": "user",

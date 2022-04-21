@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('name', 120);
-            $table->string('image', 255)->nullable();
-            $table->string('slug', 120)->nullable()->unique();
+            $table->string('slug')->unique();
             $table->string('status', 60)->default('published');
             $table->boolean('is_default')->default(false);
             $table->boolean('is_featured')->default(false);
@@ -27,6 +26,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreignId('state_id')
+                ->nullable()
                 ->constrained('states')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

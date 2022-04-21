@@ -13,7 +13,7 @@
 <script src="{{ asset(mix('js/core/scripts.js')) }}"></script>
 
 @if($configData['blankPage'] === false)
-<script src="{{ asset(mix('js/scripts/customizer.js')) }}"></script>
+    <script src="{{ asset(mix('js/scripts/customizer.js')) }}"></script>
 @endif
 <!-- END: Theme JS-->
 <!-- BEGIN: Page JS-->
@@ -28,10 +28,10 @@
 <script>
     @if(\Illuminate\Support\Facades\Session::has('toastr-success-message'))
         toastr['success']('{{ \Illuminate\Support\Facades\Session::get('toastr-success-message') }}', 'Success!', {
-            closeButton: true,
-            tapToDismiss: false,
-            rtl: false
-        });
+        closeButton: true,
+        tapToDismiss: false,
+        rtl: false
+    });
     @endif
         @if(\Illuminate\Support\Facades\Session::has('toastr-error-message'))
         toastr['error']('{{ \Illuminate\Support\Facades\Session::get('toastr-error-message') }}', 'Error!', {

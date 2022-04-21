@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('r_e_projects', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 300);
-            $table->text('content')->nullable();
-            $table->text('images')->nullable();
+            $table->string('name');
+            $table->string('slug');
+            $table->text('contents');
             $table->string('location', 255)->nullable();
             $table->unsignedSmallInteger('number_block')->nullable()->comment('Khu');
             $table->smallInteger('number_floor')->nullable()->comment('Tầng lầu');
@@ -38,10 +38,6 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->foreignId('investor_id')
                 ->constrained('r_e_investors')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->foreignId('currency_id')
-                ->constrained('r_e_currencies')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreignId('city_id')

@@ -2,6 +2,9 @@
 
 namespace App\Models\RealEstate;
 
+use App\Models\Blog;
+use App\Traits\HasDefault;
+use App\Traits\HasStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +17,8 @@ class Category extends Model
     use HasFactory;
     use Sluggable;
     use SluggableScopeHelpers;
+    use HasStatus;
+    use HasDefault;
 
     protected $table = 'r_e_categories';
 
