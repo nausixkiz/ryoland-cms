@@ -110,7 +110,7 @@ class Property extends Model implements HasMedia, Viewable
 
     public function facilities(): BelongsToMany
     {
-        return $this->belongsToMany(Feature::class, 'r_e_property_facility', 'property_id', 'facility_id');
+        return $this->belongsToMany(Feature::class, 'r_e_property_facility', 'property_id', 'facility_id')->withPivot('distance');
     }
 
     public function city(): BelongsTo
@@ -131,5 +131,15 @@ class Property extends Model implements HasMedia, Viewable
     public function isNeverExpired(): bool
     {
         return $this->never_expired === 1;
+    }
+
+    public function forRent()
+    {
+        return $this->where('type', 'rent')->get();
+    }
+
+    public function isForRent()
+    {
+        return $this->type === 'rent';
     }
 }

@@ -14,6 +14,7 @@ use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -85,6 +86,11 @@ class Project extends Model implements HasMedia, Viewable
     public function features()
     {
         return $this->belongsToMany(Feature::class, 'r_e_project_feature', 'project_id', 'feature_id');
+    }
+
+    public function facilities(): BelongsToMany
+    {
+        return $this->belongsToMany(Feature::class, 'r_e_project_facility', 'project_id', 'facility_id')->withPivot('distance');
     }
 
     public function investor()
