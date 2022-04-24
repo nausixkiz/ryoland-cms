@@ -36,10 +36,10 @@ trait HasDefault
      */
     public function scopeDefault(Builder $query, bool $isDefault = true)
     {
-        return $query->where($this->getDefaultKeyName(), $isDefault);
+        return $query->where($this->getDefaultKeyInDatabase(), $isDefault);
     }
 
-    public function getDefaultKeyName(): string
+    public function getDefaultKeyInDatabase(): string
     {
         return 'is_default';
     }

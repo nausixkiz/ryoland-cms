@@ -128,6 +128,7 @@
     <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 @endsection
 @section('page-script')
+    <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
     <script>
         (function (window, document, $) {
             'use strict';
@@ -270,16 +271,6 @@
                         });
                     });
                 }
-            });
-
-            $('.select2').each(function () {
-                const $this = $(this);
-                $this.wrap('<div class="position-relative"></div>');
-                $this.select2({
-                    dropdownAutoWidth: true,
-                    width: '100%',
-                    dropdownParent: $this.parent()
-                });
             });
 
             $('#add-new-category').on('click', function () {

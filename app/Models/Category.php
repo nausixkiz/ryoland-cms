@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\RealEstate\Project;
 use App\Traits\HasDefault;
+use App\Traits\HasFeatured;
 use App\Traits\HasStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
@@ -18,10 +20,11 @@ class Category extends Model
     use SluggableScopeHelpers;
     use HasStatus;
     use HasDefault;
+    use HasFeatured;
 
-    protected $table = 'r_e_categories';
+    protected $table = 'categories';
 
-    protected $fillable = ['name', 'description', 'status', 'is_default'];
+    protected $fillable = ['name', 'description', 'status', 'is_default', 'is_featured'];
 
     /**
      * Return the sluggable configuration array for this model.

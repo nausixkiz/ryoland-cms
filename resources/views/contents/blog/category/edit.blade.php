@@ -58,24 +58,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="mb-1 row">
-                                    <div class="col-sm-3">
-                                        <label class="col-form-label" for="icon">Icon</label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="icon"
-                                               class="form-control @error('icon') is-invalid @enderror" name="icon"
-                                               placeholder="fas fa-user" value="{{ old('icon', $category->icon) }}"
-                                               required/>
-                                        @error('icon')
-                                        <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-sm-9 offset-sm-3">
                                 <div class="mb-1">
                                     <div class="form-check form-switch">
@@ -98,8 +80,10 @@
                                     </div>
                                 </div>
                             </div>
-                            @include('contents._widgets.form.select-status-widget', ['itemStatus' => old('status', $category->status)])
-
+                            <x-form.select-status-component layoutStyle='ho'
+                                                            type="normal"
+                                                            statusVal="{{ old('status', $category->status) }}">
+                            </x-form.select-status-component>
                             <div class="col-sm-9 offset-sm-3">
                                 <button type="submit" class="btn btn-primary me-1">Save</button>
                                 <button type="reset" class="btn btn-outline-secondary">Save And Edit</button>
@@ -117,20 +101,6 @@
     <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
 @endsection
 @section('page-script')
-    <script>
-        (function (window, document, $) {
-            'use strict';
-
-            $('.select2').each(function () {
-                const $this = $(this);
-                $this.wrap('<div class="position-relative"></div>');
-                $this.select2({
-                    dropdownAutoWidth: true,
-                    width: '100%',
-                    dropdownParent: $this.parent()
-                });
-            });
-        })(window, document, jQuery);
-    </script>
+    <script src="{{ asset(mix('js/scripts/forms/form-select2.js'))}}"></script>
 @endsection
 

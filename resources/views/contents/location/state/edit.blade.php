@@ -199,6 +199,7 @@
     <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
 @endsection
 @section('page-script')
+    <script src="{{ asset(mix('js/scripts/forms/form-select2.js'))}}"></script>
     <script>
         (function (window, document, $) {
             'use strict';
@@ -312,16 +313,6 @@
                     },
                 ],
                 order: [[1, 'desc']],
-            });
-
-            $('.select2').each(function () {
-                const $this = $(this);
-                $this.wrap('<div class="position-relative"></div>');
-                $this.select2({
-                    dropdownAutoWidth: true,
-                    width: '100%',
-                    dropdownParent: $this.parent()
-                });
             });
         })(window, document, jQuery);
     </script>

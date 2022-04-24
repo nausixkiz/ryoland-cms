@@ -36,10 +36,10 @@ trait HasFeatured
      */
     public function scopeFeatured(Builder $query, bool $isFeatured = true)
     {
-        return $query->where($this->getFeaturedKeyName(), $isFeatured);
+        return $query->where($this->getFeaturedKeyInDatabase(), $isFeatured);
     }
 
-    public function getFeaturedKeyName(): string
+    public function getFeaturedKeyInDatabase(): string
     {
         return 'is_featured';
     }

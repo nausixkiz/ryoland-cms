@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name', 120)->unique();
             $table->string('description')->nullable();
-            $table->string('icon', 60);
             $table->string('slug');
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_default')->default(false);

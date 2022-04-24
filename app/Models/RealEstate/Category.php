@@ -22,7 +22,7 @@ class Category extends Model
 
     protected $table = 'r_e_categories';
 
-    protected $fillable = ['name', 'description', 'status', 'is_default'];
+    protected $fillable = ['name', 'description', 'status', 'is_default', 'is_featured'];
 
     /**
      * Return the sluggable configuration array for this model.
