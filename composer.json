@@ -20,10 +20,14 @@
         "livewire/livewire": "^2.5",
         "pusher/pusher-php-server": "^7.0",
         "rtconner/laravel-tagging": "^4.1",
+        "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-fractal": "^6.0",
         "spatie/laravel-medialibrary": "10.0.7",
         "spatie/laravel-permission": "^5.5",
-        "torann/currency": "^1.1"
+        "spatie/laravel-translatable": "^6.0",
+        "srmklive/paypal": "~3.0",
+        "torann/currency": "^1.1",
+        "watson/validating": "^7.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",

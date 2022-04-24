@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ChatController;
+use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,8 @@ Route::prefix('users')->group(function () {
     Route::put('/{id}', [UserController::class, 'update']);
     Route::delete('/{id}', [UserController::class, 'destroy']);
     Route::get('/get-base64-avatar/{id}', [UserController::class, 'getBase64Avatar']);
+});
+
+Route::prefix('payments')->group(function (){
+    Route::post('/order/paypal/call-back', [PaypalController::class, 'orderCallback'])->name('api.payments.order.paypal.callback');
 });

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Payment\CurrencyController;
 use App\Http\Controllers\RealEstate\ProjectController;
 use App\Http\Controllers\RoleAndPermissionController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Location\CityController;
 use App\Http\Controllers\Location\CountryController;
@@ -82,11 +83,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::prefix('payment')->group(function () {
-        Route::resource('payment-methods', PaymentMethodController::class, [
-            'as' => 'payment'
-        ])->except(['show']);
+//        Route::resource('payment-methods', PaymentMethodController::class, [
+//            'as' => 'payment'
+//        ])->except(['show']);
         Route::resource('currencies', CurrencyController::class, [
             'as' => 'payment'
         ])->except(['show']);
     });
+
+    Route::get('/profile/subscription', [SubscriptionController::class, 'subscription'])->name('profile.subscription');
 });

@@ -29,7 +29,7 @@
                                 <div class="col-md-4">
                                     <label class="form-label" for="filter-moderation-status">Moderation Status</label>
                                     <select id="filter-moderation-status" class="form-select text-capitalize mb-md-0 mb-2">
-                                        <option value=""> Select Moderation Status Status</option>
+                                        <option value=""> Select Moderation Status</option>
                                         @foreach($listStatus ?? \App\Constants\ModerationStatus::getAllListModerationStatus() as $key => $value)
                                             <option value="{{ $value }}" class="text-capitalize">{{ $value }}</option>
                                         @endforeach

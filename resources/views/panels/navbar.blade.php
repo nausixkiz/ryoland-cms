@@ -116,6 +116,10 @@
                                    href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0)' }}">
                                     <i class="me-50" data-feather="user"></i> Profile
                                 </a>
+                                <a class="dropdown-item"
+                                   href="{{ Route::has('profile.subscription') ? route('profile.subscription') : 'javascript:void(0)' }}">
+                                    <i class="me-50" data-feather="dollar-sign"></i> Subscription
+                                </a>
                                 @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
                                     <a class="dropdown-item" href="{{ route('api-tokens.index') }}">
                                         <i class="me-50" data-feather="key"></i> API Tokens

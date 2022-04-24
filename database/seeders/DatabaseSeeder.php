@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             FacilitySeeder::class,
             FeaturedSeeder::class,
             InvestorSeeder::class,
+            PlanSeeder::class,
         ]);
     }
 }

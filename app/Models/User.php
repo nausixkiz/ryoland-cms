@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasPlanSubscriptions;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,7 @@ class User extends Authenticatable implements HasMedia
     use InteractsWithMedia;
     use Sluggable;
     use SluggableScopeHelpers;
+    use HasPlanSubscriptions;
 
 
     /**
