@@ -16,7 +16,7 @@ trait HasDefault
      */
     public static function getAllDefault(bool $isDefault = true, array $columns = ['*']): Collection
     {
-        return static::default($isDefault)->get($columns);
+        return (new \App\Models\RealEstate\Category)->default($isDefault)->get($columns);
     }
 
     /**
@@ -36,10 +36,10 @@ trait HasDefault
      */
     public function scopeDefault(Builder $query, bool $isDefault = true)
     {
-        return $query->where($this->getFeaturedKeyName(), $isDefault);
+        return $query->where($this->getDefaultKeyName(), $isDefault);
     }
 
-    public function getFeaturedKeyName(): string
+    public function getDefaultKeyName(): string
     {
         return 'is_default';
     }

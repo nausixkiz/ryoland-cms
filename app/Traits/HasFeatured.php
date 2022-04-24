@@ -16,7 +16,7 @@ trait HasFeatured
      */
     public static function getAllFeatured(bool $isFeatured = true, array $columns = ['*']): Collection
     {
-        return static::featured($isFeatured)->get($columns);
+        return (new \App\Models\RealEstate\Property)->featured($isFeatured)->get($columns);
     }
 
     /**

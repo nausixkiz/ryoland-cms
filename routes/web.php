@@ -78,7 +78,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ])->except(['create', 'show']);
         Route::resource('cities', CityController::class, [
             'as' => 'location'
-        ]);
+        ])->except(['show']);
     });
 
     Route::prefix('payment')->group(function () {

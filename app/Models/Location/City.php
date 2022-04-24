@@ -2,6 +2,8 @@
 
 namespace App\Models\Location;
 
+use App\Traits\HasDefault;
+use App\Traits\HasFeatured;
 use App\Traits\HasStatus;
 use App\Traits\HasThumbnail;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -19,6 +21,8 @@ class City extends Model implements HasMedia
     use HasStatus;
     use InteractsWithMedia;
     use HasThumbnail;
+    use HasFeatured;
+    use HasDefault;
 
     protected $fillable = [
         'name',
@@ -49,16 +53,6 @@ class City extends Model implements HasMedia
     public function getRouteKeyName(): string
     {
         return 'slug';
-    }
-
-    public function featured(): bool
-    {
-        return $this->is_featured === 1;
-    }
-
-    public function default(): bool
-    {
-        return $this->is_default === 1;
     }
 
     public function country()

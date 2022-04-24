@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap5.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/buttons.bootstrap5.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/rowGroup.bootstrap5.min.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
 @endsection
 
 @section('content')
@@ -75,7 +74,7 @@
                                         </td>
                                         <td>
                                     <span class="avatar-content">
-                                        @if($item->featured())
+                                        @if($item->isFeatured())
                                             <em data-feather="check-circle" class="me-25 text-success"></em>
                                         @else
                                             <em data-feather="x-circle" class="me-25 text-danger"></em>
@@ -84,14 +83,18 @@
                                         </td>
                                         <td>
                                    <span class="avatar-content">
-                                        @if($item->default())
+                                        @if($item->isDefault())
                                            <em data-feather="check-circle" class="me-25 text-success"></em>
                                        @else
                                            <em data-feather="x-circle" class="me-25 text-danger"></em>
                                        @endif
                                     </span>
                                         </td>
-                                        <td>{{ $item->state->name }}</td>
+                                        <td>@empty($item->state)
+                                                Empty
+                                            @else
+                                                {{ $item->state->name }}
+                                            @endempty</td>
                                         <td>{{ $item->country->name }}</td>
                                         <td>{{ $item->created_at->diffForHumans() }}</td>
                                         <td>{{ $item->updated_at->diffForHumans() }}</td>
@@ -147,10 +150,8 @@
     <script src="{{ asset(mix('vendors/js/tables/datatable/buttons.html5.min.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/tables/datatable/buttons.print.min.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.rowGroup.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 @endsection
 @section('page-script')
-    {{-- Page js files --}}
     <script>
         const cityDataTable = $('#city-data-table');
         cityDataTable.DataTable({
@@ -173,31 +174,31 @@
                             extend: 'print',
                             text: feather.icons['printer'].toSvg({class: 'font-small-4 me-50'}) + 'Print',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 7, 8]}
                         },
                         {
                             extend: 'csv',
                             text: feather.icons['file-text'].toSvg({class: 'font-small-4 me-50'}) + 'Csv',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 7, 8]}
                         },
                         {
                             extend: 'excel',
                             text: feather.icons['file'].toSvg({class: 'font-small-4 me-50'}) + 'Excel',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 7, 8]}
                         },
                         {
                             extend: 'pdf',
                             text: feather.icons['clipboard'].toSvg({class: 'font-small-4 me-50'}) + 'Pdf',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 7, 8]}
                         },
                         {
                             extend: 'copy',
                             text: feather.icons['copy'].toSvg({class: 'font-small-4 me-50'}) + 'Copy',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 7, 8]}
                         }
                     ],
                     init: function (api, node, config) {

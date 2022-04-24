@@ -277,7 +277,7 @@
                             </div>
                         </div>
                         <x-form.select-status-component layoutStyle='vertical' type="real-estate"
-                                                        statusVal="{{ old('status') }}"/>
+                                                        statusVal="{{ old('status') }}"></x-form.select-status-component>
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
