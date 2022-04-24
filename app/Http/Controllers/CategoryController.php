@@ -62,7 +62,6 @@ class CategoryController extends Controller
             $category = new Category();
             $category->name = $request->input('name');
             $category->description = $request->input('description');
-            $category->icon = $request->input('icon');
             $category->is_featured = $request->has('is_featured');
             $category->is_default = $request->has('is_default');
             $category->status = $request->input('status');
@@ -109,7 +108,6 @@ class CategoryController extends Controller
         try {
             $category->name = $request->input('name');
             $category->description = $request->input('description');
-            $category->icon = $request->input('icon');
             $category->is_featured = $request->has('is_featured');
             $category->is_default = $request->has('is_default');
             $category->status = $request->input('status');

@@ -29,7 +29,6 @@ class CreateNewCategoryRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:6', 'max:120', 'unique:categories'],
             'description' => ['required', 'string', 'min:6', 'max:255'],
-            'icon' => ['required', 'string', 'max:60'],
             'status' => ['required', 'string', new Status()],
         ];
     }
