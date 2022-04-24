@@ -4,8 +4,8 @@ namespace App\Models\RealEstate;
 
 use App\Models\User;
 use App\Traits\HasFeatured;
+use App\Traits\HasGallery;
 use App\Traits\HasRealEstateStatus;
-use App\Traits\HasStatus;
 use App\Traits\HasThumbnail;
 use Conner\Tagging\Taggable;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -14,8 +14,11 @@ use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Project extends Model implements HasMedia, Viewable
 {
@@ -28,6 +31,7 @@ class Project extends Model implements HasMedia, Viewable
     use HasRealEstateStatus;
     use HasThumbnail;
     use HasFeatured;
+    use HasGallery;
 
     protected $table = 'r_e_projects';
 
@@ -80,7 +84,7 @@ class Project extends Model implements HasMedia, Viewable
 
     public function features()
     {
-        return $this->belongsToMany(Feature::class, 'r_e_project_feature','project_id', 'feature_id');
+        return $this->belongsToMany(Feature::class, 'r_e_project_feature', 'project_id', 'feature_id');
     }
 
     public function investor()
@@ -96,5 +100,19 @@ class Project extends Model implements HasMedia, Viewable
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @throws InvalidManipulation
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumbnail')
+            ->fit(Manipulations::FIT_STRETCH, 850, 650)
+            ->performOnCollections('thumbnail');
+
+        $this->addMediaConversion('gallery')
+            ->fit(Manipulations::FIT_STRETCH, 1904, 1006)
+            ->performOnCollections('gallery');
     }
 }

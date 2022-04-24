@@ -52,6 +52,9 @@ mixAssetsDir('scss/base/core/**/!(_)*.scss', (src, dest) =>
 // script js
 mixAssetsDir('js/scripts/**/*.js', (src, dest) => mix.scripts(src, dest))
 
+// contents js
+mixAssetsDir('js/contents/**/*.js', (src, dest) => mix.scripts(src, dest))
+
 /*
  |--------------------------------------------------------------------------
  | Application assets
@@ -73,8 +76,6 @@ mix
   .js('resources/js/core/app-menu.js', 'public/js/core')
   .js('resources/js/core/app.js', 'public/js/core')
   .js('resources/assets/js/scripts.js', 'public/js/core')
-  .js('resources/js/contents/user-list.js', 'public/js/contents')
-  .js('resources/js/contents/access-role.js', 'public/js/contents')
 
   .sass('resources/scss/base/themes/dark-layout.scss', 'public/css/base/themes', { sassOptions })
   .sass('resources/scss/base/themes/bordered-layout.scss', 'public/css/base/themes', { sassOptions })

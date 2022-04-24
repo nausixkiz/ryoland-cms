@@ -9,7 +9,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
@@ -48,7 +47,7 @@ class Category extends Model
         return 'slug';
     }
 
-    public function blogs() : HasMany
+    public function blogs(): HasMany
     {
         return $this->hasMany(Blog::class);
     }

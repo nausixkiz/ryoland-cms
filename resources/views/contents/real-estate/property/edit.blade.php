@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', __('Edit Project'))
+@section('title', 'Edit Property')
 
 @section('vendor-style')
     <!-- vendor css files -->
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/monokai-sublime.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/quill.snow.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/quill.bubble.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto+Slab&family=Slabo+27px&family=Sofia&family=Ubuntu+Mono&display=swap"
@@ -28,8 +27,7 @@
 
     <div class="row">
         <div class="col-md-12 col-12">
-            <form class="form form-vertical" method="POST"
-                  action="{{ route('real-estate.projects.update', $project->slug) }}"
+            <form class="form form-vertical repeater" method="POST" action="{{ route('real-estate.properties.update', $property->slug) }}"
                   enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -45,7 +43,7 @@
                                         <div class="col-sm-9">
                                             <input type="text" id="name"
                                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                                   value="{{ old('name', $project->name) }}"/>
+                                                   value="{{ old('name', $property->name) }}"/>
                                             @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -66,7 +64,7 @@
                                                   placeholder="Leave a description here"
                                                   id="description"
                                                   style="height: 100px"
-                                              >{{ old('description', $project->description) }} </textarea>
+                                              >{{ old('description', $property->description) }} </textarea>
                                             @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -84,7 +82,7 @@
                                             <input type="text" id="location"
                                                    class="form-control @error('location') is-invalid @enderror"
                                                    name="location"
-                                                   value="{{ old('location', $project->location) }}"/>
+                                                   value="{{ old('location', $property->location) }}"/>
                                             @error('location')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -99,8 +97,7 @@
                                             <label class="form-label" for="latitude">Latitude</label>
                                             <input class="form-control @error('latitude') is-invalid @enderror"
                                                    type="text" id="latitude"
-                                                   name="latitude" value="{{ old('latitude', $project->latitude) }}"
-                                                   required/>
+                                                   name="latitude" value="{{ old('latitude', $property->latitude) }}" required/>
                                             <a href="https://www.latlong.net/convert-address-to-lat-long.html"
                                                class="text-end mt-1">
                                                 <small class="fst-italic text-info">Click here to get this
@@ -116,8 +113,7 @@
                                             <label class="form-label" for="longitude">Longitude</label>
                                             <input class="form-control @error('longitude') is-invalid @enderror"
                                                    type="text" id="longitude"
-                                                   name="longitude" value="{{ old('longitude', $project->longitude) }}"
-                                                   required/>
+                                                   name="longitude" value="{{ old('longitude', $property->longitude) }}" required/>
                                             <a href="https://www.latlong.net/convert-address-to-lat-long.html"
                                                class="text-end mt-1">
                                                 <small class="fst-italic text-info">Click here to get this
@@ -133,108 +129,142 @@
                                 </div>
                                 <div class="col-12 mb-2">
                                     <div class="row">
-                                        <div class="col-md-4 col-12">
-                                            <label class="form-label" for="number_block">Number blocks</label>
-                                            <input class="form-control @error('number_block') is-invalid @enderror"
-                                                   type="number" id="number_block"
-                                                   name="number_block"
-                                                   value="{{ old('number_block', $project->number_block) }}" required/>
-                                            @error('number_block')
+                                        <div class="col-md-2 col-12">
+                                            <label class="form-label" for="number_bedroom">Number Bedrooms</label>
+                                            <input class="form-control @error('number_bedroom') is-invalid @enderror"
+                                                   type="number" id="number_bedroom"
+                                                   name="number_bedroom" value="{{ old('number_bedroom', $property->number_bedroom) }}" required/>
+                                            @error('number_bedroom')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="col-md-4 col-12">
-                                            <label class="form-label" for="number_floor">Number floors</label>
+                                        <div class="col-md-2 col-12">
+                                            <label class="form-label" for="number_bathroom">Number Bathrooms</label>
+                                            <input class="form-control @error('number_bathroom') is-invalid @enderror"
+                                                   type="number" id="number_bathroom"
+                                                   name="number_bathroom" value="{{ old('number_bathroom', $property->number_bathroom) }}" required/>
+                                            @error('number_bathroom')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-2 col-12">
+                                            <label class="form-label" for="number_floor">Number Floors</label>
                                             <input class="form-control @error('number_floor') is-invalid @enderror"
                                                    type="number" id="number_floor"
-                                                   name="number_floor"
-                                                   value="{{ old('number_floor', $project->number_block) }}" required/>
+                                                   name="number_floor" value="{{ old('number_floor', $property->number_floor) }}" required/>
                                             @error('number_floor')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="col-md-4 col-12">
-                                            <label class="form-label" for="number_flat">Number flats</label>
-                                            <input class="form-control @error('number_flat') is-invalid @enderror"
-                                                   type="number" id="number_flat"
-                                                   name="number_flat"
-                                                   value="{{ old('number_flat', $project->number_flat) }}" required/>
-                                            @error('number_flat')
+                                        <div class="col-md-2 col-12">
+                                            <label class="form-label" for="square">Square (m²)</label>
+                                            <input class="form-control @error('square') is-invalid @enderror"
+                                                   type="number" id="square"
+                                                   name="square" value="{{ old('square', $property->square) }}" required/>
+                                            @error('square')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <label class="form-label" for="price">Price</label>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">$</span>
+                                                <input class="form-control @error('price') is-invalid @enderror"
+                                                       type="number" id="price"
+                                                       name="price" value="{{ old('price', $property->price) }}" required/>
+                                                <span class="input-group-text">.00</span>
+                                                @error('price')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-2">
                                     <div class="row">
-                                        <div class="col-md-4 col-12">
-                                            <label class="form-label" for="price_from">Lowest price</label>
-                                            <div class="input-group mb-2">
-                                                <span class="input-group-text">$</span>
-                                                <input class="form-control @error('price_from') is-invalid @enderror"
-                                                       type="number" id="price_from"
-                                                       name="price_from"
-                                                       value="{{ old('price_from', $project->price_from) }}" required/>
-                                                <span class="input-group-text">.00</span>
-                                            </div>
-                                            @error('price_from')
-                                            <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-4 col-12">
-                                            <label class="form-label" for="price_to">Max price</label>
-                                            <div class="input-group mb-2">
-                                                <span class="input-group-text">$</span>
-                                                <input class="form-control @error('price_to') is-invalid @enderror"
-                                                       type="number" id="price_to"
-                                                       name="price_to" value="{{ old('price_to', $project->price_to) }}"
-                                                       required/>
-                                                <span class="input-group-text">.00</span>
-                                            </div>
-                                            @error('price_to')
-                                            <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 mb-2">
-                                    <div class="border rounded p-2">
-                                        <h4 class="mb-1">Thumbnail</h4>
-                                        <div class="d-flex flex-column flex-md-row">
-                                            <img
-                                                src="{{ $project->getThumbnailUrl() }}"
-                                                id="thumbnail-preview"
-                                                class="rounded me-2 mb-1 mb-md-0"
-                                                width="170"
-                                                height="110"
-                                                alt="Thumbnail"
-                                            />
-                                            <div class="featured-info">
-                                                <small
-                                                    class="@if($errors->has('thumbnail')) text-danger @else text-muted @endif">Required
-                                                    image resolution 800x400, image size
-                                                    10mb.</small>
-                                                <p class="my-50">
-                                                    <span id="thumbnail-text"></span>
-                                                </p>
-                                                <div class="d-inline-block">
-                                                    <input class="form-control @error('thumbnail') is-invalid @enderror"
-                                                           type="file" id="thumbnail"
-                                                           accept="image/*" name="thumbnail"/>
+                                        <div class="col-6">
+                                            <div class="border rounded p-2">
+                                                <h4 class="mb-1">Thumbnail</h4>
+                                                <div class="d-flex flex-column flex-md-row">
+                                                    <img
+                                                        src="{{ $property->getThumbnailUrl() }}"
+                                                        id="thumbnail-preview"
+                                                        class="rounded me-2 mb-1 mb-md-0"
+                                                        width="170"
+                                                        height="110"
+                                                        alt="Thumbnail"
+                                                    />
+                                                    <div class="featured-info">
+                                                        <small
+                                                            class="@if($errors->has('thumbnail')) text-danger @else text-muted @endif">Required
+                                                            image resolution 800x400, image size
+                                                            10mb.</small>
+                                                        <p class="my-50">
+                                                            <span id="thumbnail-text"></span>
+                                                        </p>
+                                                        <div class="d-inline-block">
+                                                            <input class="form-control @error('thumbnail') is-invalid @enderror"
+                                                                   type="file" id="thumbnail"
+                                                                   accept="image/*" name="thumbnail"/>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <div class="col-6">
+                                            <div class="border rounded p-2">
+                                                <h4 class="mb-1">Distance Key Between Facilities (km)</h4>
+                                                @error('facilities')
+                                                <div class="alert alert-primary" role="alert">
+                                                    <div class="alert-body"><strong>{{ $message }}</strong></div>
+                                                </div>
+                                                @enderror
+                                                <div class="source-item">
+                                                    <div data-repeater-list="facility">
+                                                        <div class="repeater-wrapper" data-repeater-item>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-12 mb-2">
+                                                                    <select class="form-select"
+                                                                            name="id">
+                                                                        @foreach($facilities as $facility)
+                                                                            <option value="{{ $facility->id }}">{{ $facility->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6 col-12">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control"
+                                                                               type="number"
+                                                                               name="distance" aria-describedby="button-delete"/>
+                                                                        <button class="btn btn-outline-danger" data-repeater-delete id="button-delete" type="button">Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row text-center mt-2">
+                                                    <div class="col-12 px-0">
+                                                        <button type="button" class="btn btn-primary btn-sm btn-add-new" data-repeater-create>
+                                                            <i data-feather="plus" class="me-25"></i>
+                                                            <span class="align-middle">Add Item</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-2">
@@ -252,13 +282,13 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <input type="hidden" name="contents" id="contents"
-                                           value="{{ old('contents', $project->contents) }}" hidden>
+                                    <input type="hidden" name="contents" id="contents" value="{{ old('contents', $property->contents) }}"
+                                           hidden>
                                     <div class="mb-1">
                                         <div id="full-wrapper">
                                             <div id="full-container">
                                                 <div class="editor">
-                                                    {!! old('contents', $project->contents) !!}
+                                                    {!! old('contents', $property->contents) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -286,43 +316,22 @@
                             </div>
                         </div>
                         <x-form.select-status-component layoutStyle='vertical' type="real-estate"
-                                                        statusVal="{{ old('status', $project->status) }}"/>
+                                                        statusVal="{{ old('status', $property->status ) }}">
+                        </x-form.select-status-component>
+                        <x-form.select-status-component layoutStyle='vertical' type="moderation-status"
+                                                        statusVal="{{ old('moderation-status', $property->moderation_status) }}">
+                        </x-form.select-status-component>
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Open Sell Date</h4>
+                                    <h4 class="card-title">Type</h4>
                                 </div>
                                 <div class="card-body">
-                                    <input
-                                        type="text"
-                                        id="date_sell"
-                                        class="form-control flatpickr-human-friendly @error('date_finish') is-date_sell @enderror"
-                                        name="date_sell" value="{{ old('date_sell', $project->date_sell) }}" required/>
-                                    @error('date_sell')
-                                    <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Finish Date</h4>
-                                </div>
-                                <div class="card-body">
-                                    <input
-                                        type="text"
-                                        id="date_finish"
-                                        class="form-control flatpickr-human-friendly @error('date_finish') is-invalid @enderror"
-                                        name="date_finish" value="{{ old('date_finish', $project->date_sell) }}"
-                                        required/>
-                                    @error('date_finish')
-                                    <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                    @enderror
+                                    <select class="select2 form-select @error('type') is-invalid @enderror"
+                                            id="type" name="type" required>
+                                        <option value="rent">Rent</option>
+                                        <option value="sell">Sell</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -332,16 +341,14 @@
                                     <h4 class="card-title">Option</h4>
                                 </div>
                                 <div class="card-body">
-                                    <input type="checkbox"
-                                           class="form-check-input @error('is_featured') is-invalid @enderror"
-                                           id="is_featured" name="is_featured"
-                                           @if(old('is_featured') == 'on' || $project->isFeatured()) checked @endif/>
-                                    <label class="form-check-label" for="is_featured">Is Feature</label>
-                                    @error('is_featured')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <div class="mb-2">
+                                        <x-form.feature-option-component isChecked="{{old('is_featured') == 'on' || $property->isFeatured() ? 'true' : 'false'}}">
+                                        </x-form.feature-option-component>
+                                    </div>
+                                    <div class="">
+                                        <x-form.never-expired-option-component isChecked="{{old('never_expired') == 'on' || $property->isNeverExpired() ? 'true' : 'false'}}">
+                                        </x-form.never-expired-option-component>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -360,8 +367,8 @@
                                             id="category" name="category[]" required multiple>
                                         @foreach($categories as $item)
                                             <option value="{{ $item->slug }}"
-                                                    @if(old('category', $project_category) !== null && in_array($item->slug, old('category', $project_category))) selected @endif>
-                                                {{ $item->name }}
+                                                    @if(old('category', $property_category) !== null && in_array($item->slug, old('category', $property_category))) selected @endif>
+                                            {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -371,8 +378,8 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Investor</h4>
-                                    @error('investor')
+                                    <h4 class="card-title">Project</h4>
+                                    @error('project')
                                     <p class="card-text text-danger">
                                         <strong>{{ $message }}</strong>
                                     </p>
@@ -380,10 +387,10 @@
                                 </div>
                                 <div class="card-body">
                                     <select class="select2 form-select @error('investor') is-invalid @enderror"
-                                            id="investor" name="investor" required>
-                                        @foreach($investors as $investor)
-                                            <option value="{{ $investor->id }}"
-                                                    @if(old('investor', $project->investor->id) == $investor->id) selected @endif>{{ $investor->name }}</option>
+                                            id="project" name="project" required>
+                                        @foreach($projects as $item)
+                                            <option value="{{ $item->slug }}"
+                                                    @if(old('project') == $item->slug || $property->project->slug) selected @endif>{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -404,7 +411,7 @@
                                             id="feature" name="feature[]" required multiple>
                                         @foreach($features as $item)
                                             <option value="{{ $item->id }}"
-                                                    @if(old('feature', $project_feature) !== null && in_array($item->id, old('feature', $project_feature))) selected @endif>
+                                                    @if(old('feature', $property_feature) !== null && in_array($item->id, old('feature', $property_feature))) selected @endif>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
@@ -427,7 +434,7 @@
                                             id="city" name="city" required>
                                         @foreach($cities as $item)
                                             <option value="{{ $item->slug }}"
-                                                    @if(old('city', $project->city->slug) == $item->slug) selected @endif>{{ $item->name }}</option>
+                                                    @if(old('city', $property->city->slug) == $item->slug) selected @endif>{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -450,7 +457,7 @@
     <script src="{{ asset(mix('vendors/js/bootstrap-fileinput/plugins/sortable.min.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/bootstrap-fileinput/fileinput.min.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/bootstrap-fileinput/locales/LANG.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
+    <script src="{{ asset('vendors/js/forms/repeater/jquery.repeater.min.js')}}"></script>
 @endsection
 
 @section('page-script')
@@ -463,12 +470,29 @@
         (function (window, document, $) {
             'use strict';
 
-            const humanFriendlyPickr = $('.flatpickr-human-friendly')
-            if (humanFriendlyPickr.length) {
-                humanFriendlyPickr.flatpickr({
-                    altInput: true,
-                    altFormat: 'F j, Y',
-                    dateFormat: 'Y-m-d'
+            const repeaterForm = $('.repeater');
+            if (repeaterForm.length) {
+                repeaterForm.repeater({
+                    show: function () {
+                        $(this).slideDown();
+                    },
+                    hide: function (e) {
+                        $(this).slideUp();
+                    }
+                });
+            }
+
+            const btnAddNewSource = $('.btn-add-new ');
+            if (btnAddNewSource.length) {
+                btnAddNewSource.on('click', function () {
+                    if (feather) {
+                        // featherSVG();
+                        feather.replace({ width: 14, height: 14 });
+                    }
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                        return new bootstrap.Tooltip(tooltipTriggerEl);
+                    });
                 });
             }
         })(window, document, jQuery);

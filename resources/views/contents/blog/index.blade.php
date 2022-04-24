@@ -23,16 +23,7 @@
                         <div class="card-body border-bottom">
                             <h4 class="card-title">Search & Filter</h4>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <label class="form-label" for="blog-status">Status</label>
-                                    <select id="blog-status" class="form-select text-capitalize mb-md-0 mb-2">
-                                        <option value=""> Select Status</option>
-                                        @foreach(\App\Constants\StatusConst::LIST_STATUS as $status)
-                                            <option value="{{ $status }}" class="text-capitalize">{{ $status }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4 blog_author"></div>
+                                <x-filter.select-status-component type="normal" />
                             </div>
                         </div>
                         <div class="card-datatable table-responsive pt-0">
@@ -264,7 +255,7 @@
                 const table = settings.oInstance.api();
                 table.columns(4).every(function () {
                     const column = this;
-                    $('#blog-status').on('change', function () {
+                    $('#filter-status').on('change', function () {
                         const val = $.fn.dataTable.util.escapeRegex($(this).val());
                         column.search(val, true, false).draw()
                     });

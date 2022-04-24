@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Payment\CurrencyController;
 use App\Http\Controllers\RealEstate\ProjectController;
 use App\Http\Controllers\RoleAndPermissionController;
 use App\Http\Controllers\UserController;
@@ -43,13 +44,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             'as' => 'real-estate'
         ])->except(['show']);
 
-        Route::resource('properties', PropertyController::class, [
+        Route::resource('properties', \App\Http\Controllers\RealEstate\PropertyController::class, [
             'as' => 'real-estate'
-        ]);
+        ])->except(['show']);
 
         Route::resource('projects', ProjectController::class, [
             'as' => 'real-estate'
-        ]);
+        ])->except(['show']);
 
         Route::resource('features', FeatureController::class, [
             'as' => 'real-estate'
@@ -78,5 +79,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resource('cities', CityController::class, [
             'as' => 'location'
         ]);
+    });
+
+    Route::prefix('payment')->group(function () {
+        Route::resource('payment-methods', PaymentMethodController::class, [
+            'as' => 'payment'
+        ])->except(['show']);
+        Route::resource('currencies', CurrencyController::class, [
+            'as' => 'payment'
+        ])->except(['show']);
     });
 });

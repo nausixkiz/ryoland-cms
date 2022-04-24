@@ -19,14 +19,7 @@
                     <h4 class="card-title">Search & Filter</h4>
                     <div class="row">
                         <div class="col-md-4">
-                            <label class="form-label" for="category-status">Status</label>
-                            <select id="category-status" class="form-select select2 mb-md-0 mb-2 ">
-                                <option value=""> Select Status</option>
-                                @foreach(\App\Constants\StatusConst::LIST_STATUS as $status)
-                                    <option value="{{ $status }}"><span class="text-capitalize">{{ $status }}</span>
-                                    </option>
-                                @endforeach
-                            </select>
+                            <x-filter.select-status-component type="normal" />
                         </div>
                     </div>
                 </div>
@@ -271,7 +264,7 @@
                     const table = settings.oInstance.api();
                     table.columns(4).every(function () {
                         const column = this;
-                        $('#category-status').on('change', function () {
+                        $('#filter-status').on('change', function () {
                             const val = $.fn.dataTable.util.escapeRegex($(this).val());
                             column.search(val, true, false).draw()
                         });

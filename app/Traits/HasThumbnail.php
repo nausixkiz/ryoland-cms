@@ -7,21 +7,25 @@ use Illuminate\Support\Facades\Storage;
 
 trait HasThumbnail
 {
-    public function getThumbnailUrl()
+    public function getThumbnailUrl(): ?string
     {
-        if ($this->hasMedia('thumbnail')) {
+        if ($this->hasThumbnail()) {
             return $this->getFirstMedia('thumbnail')->getTemporaryUrl(Carbon::now()->addMinutes(5));
         }
 
         return null;
     }
 
-    public function getTemporaryUrl(string $fullFilePath, int $numberOfMinutes, string $disk)
+    public function getThumbnailConversionUrl(): ?string
     {
-        return Storage::disk($disk)->temporaryUrl($fullFilePath, now()->addMinutes($numberOfMinutes));
+        if ($this->hasMedia('thumbnail')) {
+            return $this->getFirstMedia('thumbnail')->getTemporaryUrl(Carbon::now()->addMinutes(5), 'thumbnail');
+        }
+
+        return null;
     }
 
-    public function hasThumbnail()
+    public function hasThumbnail(): bool
     {
         return $this->hasMedia('thumbnail');
     }

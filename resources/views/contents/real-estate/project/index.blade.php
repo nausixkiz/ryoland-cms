@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Blogs')
+@section('title', __('Projects'))
 
 @section('vendor-style')
     {{-- vendor css files --}}
@@ -24,7 +24,7 @@
                             <h4 class="card-title">Search & Filter</h4>
                             <div class="row">
                                 <div class="col-md-4">
-                                    @include('contents._widgets.search.select-status-widget', ['listStatus' => \App\Constants\RealEstateStatus::getAllListRealEstateStatus()])
+                                    <x-filter.select-status-component type="real-estate" />
                                 </div>
                             </div>
                         </div>
@@ -34,11 +34,12 @@
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Id</th>
                                     <th>Name</th>
                                     <th>Thumbnail</th>
                                     <th>Slug</th>
                                     <th>Status</th>
+                                    <th>Sell Date</th>
+                                    <th>Finish Date</th>
                                     <th>Author</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
@@ -49,7 +50,6 @@
                                 @foreach($projects as $item)
                                     <tr>
                                         <td></td>
-                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             @if($item->hasThumbnail())
@@ -59,6 +59,8 @@
                                         </td>
                                         <td>{{ $item->slug }}</td>
                                         <td>{!! $item->renderRealEstateBadgeHtml() !!}</td>
+                                        <td>{{ $item->date_sell }}</td>
+                                        <td>{{ $item->date_finish }}</td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->created_at->diffForHumans() }}</td>
                                         <td>{{ $item->updated_at->diffForHumans() }}</td>
@@ -144,31 +146,31 @@
                             extend: 'print',
                             text: feather.icons['printer'].toSvg({class: 'font-small-4 me-50'}) + 'Print',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 5, 6, 7, 8, 9]}
                         },
                         {
                             extend: 'csv',
                             text: feather.icons['file-text'].toSvg({class: 'font-small-4 me-50'}) + 'Csv',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 5, 6, 7, 8, 9]}
                         },
                         {
                             extend: 'excel',
                             text: feather.icons['file'].toSvg({class: 'font-small-4 me-50'}) + 'Excel',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 5, 6, 7, 8, 9]}
                         },
                         {
                             extend: 'pdf',
                             text: feather.icons['clipboard'].toSvg({class: 'font-small-4 me-50'}) + 'Pdf',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 5, 6, 7, 8, 9]}
                         },
                         {
                             extend: 'copy',
                             text: feather.icons['copy'].toSvg({class: 'font-small-4 me-50'}) + 'Copy',
                             className: 'dropdown-item',
-                            exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8]}
+                            exportOptions: {columns: [1, 3, 4, 5, 6, 7, 8, 9]}
                         }
                     ],
                     init: function (api, node, config) {
@@ -180,10 +182,10 @@
                     },
                 },
                 {
-                    text: 'Create New Blog',
+                    text: 'Create New Project',
                     className: 'add-new btn btn-primary',
                     attr: {
-                        'id': 'add-new-blog',
+                        'id': 'add-new-project',
                     },
                     init: function (api, node) {
                         $(node).removeClass('btn-secondary')
@@ -192,11 +194,6 @@
             ],
             responsive: {
                 details: {
-                    // display: $.fn.dataTable.Responsive.display.modal({
-                    //     header: function () {
-                    //         return 'Details of';
-                    //     }
-                    // }),
                     type: 'column',
                     renderer: function (api, rowIdx, columns) {
                         const data = $.map(columns, function (col, i) {
@@ -252,15 +249,15 @@
                 const table = settings.oInstance.api();
                 table.columns(4).every(function () {
                     const column = this;
-                    $('#blog-status').on('change', function () {
+                    $('#filter-status').on('change', function () {
                         const val = $.fn.dataTable.util.escapeRegex($(this).val());
                         column.search(val, true, false).draw()
                     });
                 });
             }
         });
-        $('#add-new-blog').on('click', function () {
-            window.location.href = '{{ route('blogs.create') }}';
+        $('#add-new-project').on('click', function () {
+            window.location.href = '{{ route('real-estate.projects.create') }}';
         });
     </script>
 @endsection

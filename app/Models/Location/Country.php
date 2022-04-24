@@ -2,7 +2,6 @@
 
 namespace App\Models\Location;
 
-use App\Traits\HasDefault;
 use App\Traits\HasStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;

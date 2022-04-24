@@ -125,8 +125,8 @@
                                     </div>
                                 </div>
                             </div>
-                            @include('contents._widgets.form.select-status-widget', ['itemStatus' => old('status')])
-                            <div class="col-sm-9 offset-sm-3">
+                            <x-form.select-status-component layoutStyle="" type="normal" :statusVal="old('status')"></x-form.select-status-component>
+                            <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary me-1">Save</button>
                             </div>
                         </div>

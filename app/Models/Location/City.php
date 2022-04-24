@@ -51,12 +51,12 @@ class City extends Model implements HasMedia
         return 'slug';
     }
 
-    public function featured() : bool
+    public function featured(): bool
     {
         return $this->is_featured === 1;
     }
 
-    public function default() : bool
+    public function default(): bool
     {
         return $this->is_default === 1;
     }

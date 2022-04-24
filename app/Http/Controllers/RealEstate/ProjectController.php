@@ -5,8 +5,10 @@ namespace App\Http\Controllers\RealEstate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RealEstate\Project\CreateNewProjectRequest;
 use App\Http\Requests\RealEstate\Project\UpdateProjectRequest;
+use App\Http\Requests\RealEstate\Property\CreateNewPropertyRequest;
 use App\Models\Location\City;
 use App\Models\RealEstate\Category;
+use App\Models\RealEstate\Facility;
 use App\Models\RealEstate\Feature;
 use App\Models\RealEstate\Investor;
 use App\Models\RealEstate\Project;
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
-    protected $indexRoute = 'real-estate.projects.index';
+    protected string $indexRoute = 'real-estate.projects.index';
 
     /**
      * Display a listing of the resource.
@@ -59,6 +61,7 @@ class ProjectController extends Controller
             'investors' => Investor::all(),
             'features' => Feature::all(),
             'cities' => City::all(),
+            'facilities' => Facility::all(),
         ]);
     }
 
@@ -87,14 +90,14 @@ class ProjectController extends Controller
 
             $categories = Category::whereIn('slug', $request->input('category'))->select('id')->get();
             $project->categories()->sync($categories);
-            $project->features()->sync($request->input('investor'));
+            $project->features()->sync($request->input('feature'));
 
             $project->addMediaFromRequest('thumbnail')
                 ->toMediaCollection('thumbnail');
 
             if ($request->hasFile('gallery')) {
-                foreach ($request->file('gallery') as $document) {
-                    $project->addMedia($document)->toMediaCollection('documents');
+                foreach ($request->file('gallery') as $gallery) {
+                    $project->addMedia($gallery)->toMediaCollection('gallery');
                 }
             }
 
@@ -141,8 +144,8 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param int $id
+     * @param UpdateProjectRequest $request
+     * @param string $slug
      * @return RedirectResponse
      */
     public function update(UpdateProjectRequest $request, string $slug)
@@ -176,8 +179,8 @@ class ProjectController extends Controller
             if ($request->hasFile('gallery')) {
                 $project->clearMediaCollection('gallery');
 
-                foreach ($request->file('gallery') as $document) {
-                    $project->addMedia($document)->toMediaCollection('documents');
+                foreach ($request->file('gallery') as $gallery) {
+                    $project->addMedia($gallery)->toMediaCollection('gallery');
                 }
             }
 
