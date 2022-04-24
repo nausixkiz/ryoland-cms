@@ -48,7 +48,7 @@ class BlogController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Factory|View|Application
     {
         $breadcrumbs = [
             ['link' => route('home'), 'name' => "Home",],
@@ -106,7 +106,7 @@ class BlogController extends Controller
             Session::flash('toastr-error-message', 'Something went wrong');
         }
 
-        return back();
+        return redirect()->route($this->indexRoute);
     }
 
     /**

@@ -136,7 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                        <x-form.select-status-component layoutStyle='ho'
+                        <x-form.select-status-component layoutStyle='vertical'
                                                         type="normal"
                                                         statusVal="{{ old('status', $blog->status) }}">
                         </x-form.select-status-component>
@@ -163,6 +163,11 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Categories</h4>
+                                    @error('category')
+                                        <p class="card-text text-danger">
+                                            <strong>{{ $message }}</strong>
+                                        </p>
+                                    @enderror
                                 </div>
                                 <div class="card-body">
                                     <select class="select2 form-select @error('category') is-invalid @enderror"
@@ -173,11 +178,6 @@
                                                     @if($blog->category->slug == $category->slug) selected @endif>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('category')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -185,16 +185,16 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Tags</h4>
+                                    @error('tags')
+                                    <p class="card-text text-danger">
+                                            <strong>{{ $message }}</strong>
+                                        </p>
+                                    @enderror
                                 </div>
                                 <div class="card-body">
                                     <input type="text" id="tags" data-role="tagsinput"
                                            class="form-control @error('tags') is-invalid @enderror" name="tags"
                                            value="{{ old('tags') }}"/>
-                                    @error('tags')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
                         </div>

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap5.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/buttons.bootstrap5.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/rowGroup.bootstrap5.min.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
 @endsection
 
 @section('content')
@@ -23,7 +22,9 @@
                         <div class="card-body border-bottom">
                             <h4 class="card-title">Search & Filter</h4>
                             <div class="row">
+                                <div class="col-md-4">
                                 <x-filter.select-status-component type="normal" />
+                                </div>
                             </div>
                         </div>
                         <div class="card-datatable table-responsive pt-0">
@@ -121,7 +122,6 @@
     <script src="{{ asset(mix('vendors/js/tables/datatable/buttons.html5.min.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/tables/datatable/buttons.print.min.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.rowGroup.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 @endsection
 @section('page-script')
     {{-- Page js files --}}
@@ -195,11 +195,6 @@
             ],
             responsive: {
                 details: {
-                    // display: $.fn.dataTable.Responsive.display.modal({
-                    //     header: function () {
-                    //         return 'Details of';
-                    //     }
-                    // }),
                     type: 'column',
                     renderer: function (api, rowIdx, columns) {
                         const data = $.map(columns, function (col, i) {
