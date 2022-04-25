@@ -40,6 +40,9 @@ class PaypalController extends Controller
         if($user->getRoleName() !== 'Super Administrator' && $user->getRoleName() !== 'Administrator'){
             $user->syncRoles('Authorized Dealer');
         }
+        else{
+            $user->syncRoles($user->getRoleName());
+        }
 
         return response()->json('ok');
     }
