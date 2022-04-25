@@ -1,7 +1,7 @@
 
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Pricing')
+@section('title', 'Pricing Plans')
 
 @section('page-style')
     {{-- Page Css files --}}
@@ -48,7 +48,7 @@
                                     <li class="list-group-item">Unlimited forms and surveys</li>
                                     <li class="list-group-item">Unlimited fields</li>
                                     <li class="list-group-item">Basic form creation tools</li>
-                                    <li class="list-group-item">Support slowly</li>
+                                    <li class="list-group-item">Support by ticket</li>
                                 </ul>
                                 <div id="paypal-basic-button-container"></div>
                             </div>
@@ -74,8 +74,8 @@
                                 <ul class="list-group list-group-circle text-start">
                                     <li class="list-group-item">Include <strong>Basic</strong></li>
                                     <li class="list-group-item">Unlimited listing</li>
-                                    <li class="list-group-item">Unlimited forms and surveys</li>
                                     <li class="list-group-item">File upload up to 5GB storage</li>
+                                    <li class="list-group-item">Support by ticket and email</li>
                                 </ul>
                                 <div id="paypal-standard-button-container"></div>
                             </div>
@@ -97,10 +97,9 @@
                                 </div>
                                 <ul class="list-group list-group-circle text-start">
                                     <li class="list-group-item">Include <strong>Basic</strong> and <strong>Standard</strong></li>
-                                    <li class="list-group-item">Logic Jumps</li>
                                     <li class="list-group-item">Unlimited file upload size</li>
                                     <li class="list-group-item">Unlimited form creation tools</li>
-                                    <li class="list-group-item">Support 24/7</li>
+                                    <li class="list-group-item">Support 24/7 by ticket, email and chat</li>
                                 </ul>
                                 <div  class="mt-2" id="smart-button-container">
                                     <div style="text-align: center;">
@@ -139,10 +138,22 @@
                 priceEnterpriseValue.html(enterpriseYearlyPlan);
                 priceStandardValue.html(standardYearlyPlan);
                 priceBasicValue.html(basicYearlyPlan);
+                $('#paypal-basic-button-container').html('');
+                initPayPalButton('#paypal-basic-button-container', '{{ currency()->getUserCurrency() }}', 239);
+                $('#paypal-standard-button-container').html('');
+                initPayPalButton('#paypal-standard-button-container', '{{ currency()->getUserCurrency() }}', 499);
+                $('#paypal-enterprise-button-container').html('');
+                initPayPalButton('#paypal-enterprise-button-container', '{{ currency()->getUserCurrency() }}', 1199);
             } else {
                 priceEnterpriseValue.html(enterpriseMonthlyPlan);
                 priceStandardValue.html(standardMonthlyPlan);
                 priceBasicValue.html(basicMonthlyPlan);
+                initPayPalButton('#paypal-basic-button-container', '{{ currency()->getUserCurrency() }}', 19);
+                $('#paypal-basic-button-container').html('');
+                initPayPalButton('#paypal-standard-button-container', '{{ currency()->getUserCurrency() }}', 49);
+                $('#paypal-standard-button-container').html('');
+                initPayPalButton('#paypal-enterprise-button-container', '{{ currency()->getUserCurrency() }}', 99);
+                $('#paypal-enterprise-button-container').html('');
             }
         });
         function initPayPalButton(element, currencyCode, amountValue) {

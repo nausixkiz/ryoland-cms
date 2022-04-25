@@ -30,7 +30,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->hasRole('admin')) {
+        if(auth()->user()->hasRole('Administrator') || auth()->user()->hasRole('Super Administrator')) {
             $properties = Property::all();
         } else {
             $properties = auth()->user()->properties()->with('investor', 'project', 'category', 'city')->get();

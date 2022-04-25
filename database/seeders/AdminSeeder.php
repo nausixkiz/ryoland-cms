@@ -37,5 +37,16 @@ class AdminSeeder extends Seeder
         ]);
         $admin->assignRole('Administrator');
         CreateNewUser::createTeam($admin);
+
+        $dealer = User::create([
+            'name' => 'Authorized Dealer',
+            'username' => 'Authorized Dealer',
+            'email' => 'authorizeddealer@ryoland.com',
+            'password' => Hash::make('123456789'),
+            'phone' => '0963638888',
+            'address' => 'Hà Nội',
+        ]);
+        $dealer->assignRole('Authorized Dealer');
+        CreateNewUser::createTeam($dealer);
     }
 }

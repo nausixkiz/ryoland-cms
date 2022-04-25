@@ -37,6 +37,8 @@ class PaypalController extends Controller
             $user->newPlanSubscription('primary', $plan);
         }
 
+        $user->syncRoles('Authorized Dealer');
+
         return response()->json('ok');
     }
 }

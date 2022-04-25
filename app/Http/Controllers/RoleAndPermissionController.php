@@ -23,7 +23,7 @@ class RoleAndPermissionController extends Controller
         }
         $pageConfigs = ['pageHeader' => false,];
 
-        return view('content.role-and-permission.access-roles', [
+        return view('contents.role-and-permission.access-roles', [
             'pageConfigs' => $pageConfigs,
             'listRoles' => $response,
         ]);
@@ -33,6 +33,6 @@ class RoleAndPermissionController extends Controller
     {
         $pageConfigs = ['pageHeader' => false,];
 
-        return view('content.role-and-permission.access-permission', ['pageConfigs' => $pageConfigs]);
+        return view('contents.role-and-permission.access-permission', ['pageConfigs' => $pageConfigs]);
     }
 }
