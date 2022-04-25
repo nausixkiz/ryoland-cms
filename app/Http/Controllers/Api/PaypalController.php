@@ -37,7 +37,9 @@ class PaypalController extends Controller
             $user->newPlanSubscription('primary', $plan);
         }
 
-        $user->syncRoles('Authorized Dealer');
+        if($user->getRoleName() !== 'Super Administrator' && $user->getRoleName() !== 'Administrator'){
+            $user->syncRoles('Authorized Dealer');
+        }
 
         return response()->json('ok');
     }
