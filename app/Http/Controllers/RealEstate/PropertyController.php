@@ -30,6 +30,12 @@ class PropertyController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->hasRole('admin')) {
+            $properties = Property::all();
+        } else {
+            $properties = auth()->user()->properties()->with('investor', 'project', 'category', 'city')->get();
+        }
+
         $breadcrumbs = [
             ['link' => route('home'), 'name' => __('Home')],
             ['name' => __('Properties')],
@@ -37,17 +43,21 @@ class PropertyController extends Controller
 
         return view('contents.real-estate.property.index', [
             'breadcrumbs' => $breadcrumbs,
-            'properties' => Property::all(),
+            'properties' => $properties,
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View
+     * @return Application|Factory|View|RedirectResponse
      */
-    public function create(): View|Factory|Application
+    public function create()
     {
+        if(!auth()->user()->subscribedToOneOfTheSubscription()){
+            return redirect()->route('profile.subscription');
+        }
+
         $breadcrumbs = [
             ['link' => route('home'), 'name' => __('Home')],
             ['link' => route($this->indexRoute), 'name' => __('Properties')],

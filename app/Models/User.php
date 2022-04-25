@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\RealEstate\Property;
 use App\Traits\HasPlanSubscriptions;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
@@ -112,10 +113,10 @@ class User extends Authenticatable implements HasMedia
         });
     }
 
-    public function active()
-    {
-        return $this->status === true;
-    }
+//    public function active()
+//    {
+//        return $this->status === true;
+//    }
 
 
     /**
@@ -150,5 +151,10 @@ class User extends Authenticatable implements HasMedia
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 }

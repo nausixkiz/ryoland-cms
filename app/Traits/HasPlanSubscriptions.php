@@ -87,9 +87,27 @@ trait HasPlanSubscriptions
      *
      * @return bool
      */
-    public function subscribedTo($planId): bool
+    public function subscribedTo(int $planId): bool
     {
         $subscription = $this->planSubscriptions()->where('plan_id', $planId)->first();
+
+        return $subscription && $subscription->active();
+    }
+
+    /**
+     * Check if the subscriber subscribed to the given plan.
+     *
+     * @param int $planId
+     *
+     * @return bool
+     */
+    public function subscribedToOneOfTheSubscription() : bool
+    {
+        $subscription = $this->planSubscriptions()->whereIn('plan_id', Plan::all()->pluck('id'))->first();
+
+        if(!$subscription) {
+            return false;
+        }
 
         return $subscription && $subscription->active();
     }

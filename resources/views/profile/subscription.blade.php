@@ -14,7 +14,7 @@
         <div class="text-center">
             <h1 class="mt-5">Pricing Plans</h1>
             <p class="mb-2 pb-75">
-                All plans include 40+ advanced tools and features to boost your product. Choose the best plan to fit your needs.
+                {{ config('app.name') }} offers competitive rates and pricing plans to help you find one that fits the needs and budget of your business.
             </p>
             <div class="d-flex align-items-center justify-content-center mb-5 pb-50">
                 <h6 class="me-1 mb-0">Monthly</h6>
@@ -40,7 +40,7 @@
                                 <p class="card-text">A simple start for everyone</p>
                                 <div class="annual-plan">
                                     <div class="plan-price mt-2">
-                                        <span class="pricing-basic-value fw-bolder text-primary">{{ currency(19.00) }}</span>
+                                        <span class="pricing-basic-value fw-bolder text-primary">{{ currency(19) }}</span>
                                     </div>
                                 </div>
                                 <ul class="list-group list-group-circle text-start">
@@ -50,7 +50,7 @@
                                     <li class="list-group-item">Basic form creation tools</li>
                                     <li class="list-group-item">Support slowly</li>
                                 </ul>
-                                <button class="btn w-100 btn-outline-success mt-2">Your current plan</button>
+                                <div id="paypal-basic-button-container"></div>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                                 <p class="card-text">For small to medium businesses</p>
                                 <div class="annual-plan">
                                     <div class="plan-price mt-2">
-                                        <span class="pricing-standard-value fw-bolder text-primary">{{ currency(49.00) }}</span>
+                                        <span class="pricing-standard-value fw-bolder text-primary">{{ currency(49) }}</span>
                                     </div>
                                 </div>
                                 <ul class="list-group list-group-circle text-start">
@@ -77,7 +77,7 @@
                                     <li class="list-group-item">Unlimited forms and surveys</li>
                                     <li class="list-group-item">File upload up to 5GB storage</li>
                                 </ul>
-                                <button class="btn w-100 btn-primary mt-2">Upgrade</button>
+                                <div id="paypal-standard-button-container"></div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                                 <p class="card-text">Solution for big organizations</p>
                                 <div class="annual-plan">
                                     <div class="plan-price mt-2">
-                                        <span class="pricing-enterprise-value fw-bolder text-primary">{{ currency(99.00) }}</span>
+                                        <span class="pricing-enterprise-value fw-bolder text-primary">{{ currency(99) }}</span>
                                     </div>
                                 </div>
                                 <ul class="list-group list-group-circle text-start">
@@ -104,7 +104,7 @@
                                 </ul>
                                 <div  class="mt-2" id="smart-button-container">
                                     <div style="text-align: center;">
-                                        <div id="paypal-button-container"></div>
+                                        <div id="paypal-enterprise-button-container"></div>
                                     </div>
                                 </div>
                             </div>
@@ -180,13 +180,18 @@
                                 },
                                 dataType: "JSON",
                                 success:function(data) {
-                                    // Show a success message within this page, e.g.
-                                    const element = document.getElementById('paypal-button-container');
-                                    element.innerHTML = '';
-                                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                    toastr['success']('Order ' + orderData.id + ' is successfully', 'Success!', {
+                                        closeButton: true,
+                                        tapToDismiss: false,
+                                        rtl: false
+                                    });
                                 },
                                 error:function(data) {
-                                    console.log(data);
+                                    toastr['error']('Something wrong. Please contact administrator or try again later!', 'Error!', {
+                                        closeButton: true,
+                                        tapToDismiss: false,
+                                        rtl: false
+                                    });
                                 },
                             });
                         }
@@ -198,6 +203,8 @@
                 }
             }).render(element);
         }
-        initPayPalButton('#paypal-button-container', '{{ currency()->getUserCurrency() }}', 99);
+        initPayPalButton('#paypal-basic-button-container', '{{ currency()->getUserCurrency() }}', 19);
+        initPayPalButton('#paypal-standard-button-container', '{{ currency()->getUserCurrency() }}', 49);
+        initPayPalButton('#paypal-enterprise-button-container', '{{ currency()->getUserCurrency() }}', 99);
     </script>
 @endsection

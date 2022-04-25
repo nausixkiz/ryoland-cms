@@ -250,7 +250,7 @@ class PlanSubscription extends Model
      */
     public function ended(): bool
     {
-        return $this->ends_at ? Carbon::now()->gte($this->ends_at) : false;
+        return $this->ends_at && Carbon::now()->gte($this->ends_at);
     }
 
     /**
@@ -260,7 +260,7 @@ class PlanSubscription extends Model
      */
     public function onTrial(): bool
     {
-        return $this->trial_ends_at ? Carbon::now()->lt($this->trial_ends_at) : false;
+        return $this->trial_ends_at && Carbon::now()->lt($this->trial_ends_at);
     }
 
     /**
