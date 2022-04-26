@@ -85,6 +85,7 @@ class PropertyController extends Controller
     {
         try {
             $property = new Property();
+
             $property->fill($request->only([
                 'name', 'description', 'location', 'latitude', 'longitude',
                 'number_bedroom', 'number_bathroom', 'number_floor', 'square', 'price',
@@ -104,18 +105,21 @@ class PropertyController extends Controller
             $property->categories()->sync(Category::whereIn('slug', $request->input('category'))->select('id')->get());
             $property->features()->sync($request->input('feature'));
 
-            $pivotData = [];
+            if($request->has('facility'))
+            {
+                $pivotData = [];
 
-            foreach ($request->input('facility') as $facility) {
-                if ($facility['distance'] == null || $facility['id'] == null) {
-                    continue;
+                foreach ($request->input('facility') as $facility) {
+                    if ($facility['distance'] == null || $facility['id'] == null) {
+                        continue;
+                    }
+
+                    $pivotData[$facility['id']] = ['distance' => $facility['distance']];
                 }
 
-                $pivotData[$facility['id']] = ['distance' => $facility['distance']];
-            }
-
-            if (!empty($pivotData)) {
-                $property->facilities()->sync($pivotData);
+                if (!empty($pivotData)) {
+                    $property->facilities()->sync($pivotData);
+                }
             }
 
             $property->addMediaFromRequest('thumbnail')

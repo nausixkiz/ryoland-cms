@@ -229,7 +229,7 @@
                                                 </div>
                                                 @enderror
                                                 <div class="source-item">
-                                                    <div data-repeater-list="facilities">
+                                                    <div data-repeater-list="facility">
                                                         <div class="repeater-wrapper" data-repeater-item>
                                                             <div class="row">
                                                                 <div class="col-md-6 col-12 mb-2">
