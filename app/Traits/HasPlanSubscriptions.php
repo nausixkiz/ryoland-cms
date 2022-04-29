@@ -97,8 +97,6 @@ trait HasPlanSubscriptions
     /**
      * Check if the subscriber subscribed to the given plan.
      *
-     * @param int $planId
-     *
      * @return bool
      */
     public function subscribedToOneOfTheSubscription() : bool

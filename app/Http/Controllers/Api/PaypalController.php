@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Models\SubscriptionAndPlan\Plan;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PaypalController extends Controller
 {
-    public function orderCallback(Request $request)
+    public function orderCallback(Request $request): JsonResponse
     {
         $orderData = $request->input('orderData');
         $user = User::findBySlugOrFail(($request->input('user_slug')));

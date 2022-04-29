@@ -35,10 +35,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
-        Route::prefix('access')->group(function () {
-            Route::get('/roles', [RoleAndPermissionController::class, 'roles'])->name('access.roles');
-            Route::get('/permissions', [RoleAndPermissionController::class, 'permissions'])->name('access.permissions');
-        });
+//        Route::prefix('access')->group(function () {
+//            Route::get('/roles', [RoleAndPermissionController::class, 'roles'])->name('access.roles');
+////            Route::get('/permissions', [RoleAndPermissionController::class, 'permissions'])->name('access.permissions');
+//        });
 
         Route::prefix('real-estate')->group(function () {
             Route::resource('categories', \App\Http\Controllers\RealEstate\CategoryController::class, [

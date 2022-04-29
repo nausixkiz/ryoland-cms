@@ -133,6 +133,35 @@
 @endsection
 @section('page-script')
     <!-- Page js files -->
-    <script src="{{ asset(mix('js/scripts/pages/modal-add-role.js')) }}"></script>
+    <script>
+        (function () {
+            var addRoleForm = $('#addRoleForm');
+
+            // add role form validation
+            if (addRoleForm.length) {
+                addRoleForm.validate({
+                    rules: {
+                        modalRoleName: {
+                            required: true
+                        }
+                    }
+                });
+            }
+
+            // reset form on modal hidden
+            $('.modal').on('hidden.bs.modal', function () {
+                $(this).find('form')[0].reset();
+            });
+
+            // Select All checkbox click
+            const selectAll = document.querySelector('#selectAll'),
+                checkboxList = document.querySelectorAll('[type="checkbox"]');
+            selectAll.addEventListener('change', t => {
+                checkboxList.forEach(e => {
+                    e.checked = t.target.checked;
+                });
+            });
+        })();
+    </script>
     <script src="{{ asset(mix('js/scripts/pages/app-access-roles.js')) }}"></script>
 @endsection

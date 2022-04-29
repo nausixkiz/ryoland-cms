@@ -63,7 +63,7 @@ class PlanFeature extends Model implements Sortable
      *
      * @var array
      */
-    public $translatable = [
+    public array $translatable = [
         'name',
         'description',
     ];

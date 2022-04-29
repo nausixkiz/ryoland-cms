@@ -52,7 +52,7 @@ class PropertyController extends Controller
      *
      * @return Application|Factory|View|RedirectResponse
      */
-    public function create()
+    public function create(): View|Factory|RedirectResponse|Application
     {
         if(!auth()->user()->subscribedToOneOfTheSubscription()){
             return redirect()->route('profile.subscription');
@@ -107,15 +107,7 @@ class PropertyController extends Controller
 
             if($request->has('facility'))
             {
-                $pivotData = [];
-
-                foreach ($request->input('facility') as $facility) {
-                    if ($facility['distance'] == null || $facility['id'] == null) {
-                        continue;
-                    }
-
-                    $pivotData[$facility['id']] = ['distance' => $facility['distance']];
-                }
+                $pivotData = self::handleFacilitiesData($request->input('facility'));
 
                 if (!empty($pivotData)) {
                     $property->facilities()->sync($pivotData);
@@ -201,18 +193,13 @@ class PropertyController extends Controller
             $property->categories()->sync(Category::whereIn('slug', $request->input('category'))->select('id')->get());
             $property->features()->sync($request->input('feature'));
 
-            $pivotData = [];
+            if($request->has('facility'))
+            {
+                $pivotData = self::handleFacilitiesData($request->input('facility'));
 
-            foreach ($request->input('facility') as $facility) {
-                if ($facility['distance'] == null || $facility['id'] == null) {
-                    continue;
+                if (!empty($pivotData)) {
+                    $property->facilities()->sync($pivotData);
                 }
-
-                $pivotData[$facility['id']] = ['distance' => $facility['distance']];
-            }
-
-            if (!empty($pivotData)) {
-                $property->facilities()->sync($pivotData);
             }
 
             if ($request->hasFile('thumbnail')) {
@@ -252,5 +239,20 @@ class PropertyController extends Controller
             Log::error($e->getMessage());
             return redirect()->back()->with('toastr-error-message', __('Something went wrong'));
         }
+    }
+
+    public function handleFacilitiesData($facilities): array
+    {
+        $pivotData = [];
+
+        foreach ($facilities as $facility) {
+            if ($facility['distance'] == null || $facility['id'] == null) {
+                continue;
+            }
+
+            $pivotData[$facility['id']] = ['distance' => $facility['distance']];
+        }
+
+        return $pivotData;
     }
 }

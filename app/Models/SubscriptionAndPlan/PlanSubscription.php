@@ -77,7 +77,7 @@ class PlanSubscription extends Model
      *
      * @var array
      */
-    public $translatable = [
+    public array $translatable = [
         'name',
         'description',
     ];
@@ -290,7 +290,7 @@ class PlanSubscription extends Model
      *
      * @return $this
      */
-    public function changePlan(Plan $plan)
+    public function changePlan(Plan $plan): static
     {
         // If plans does not have the same billing frequency
         // (e.g., invoice_interval and invoice_period) we will update
@@ -315,7 +315,7 @@ class PlanSubscription extends Model
      * @throws LogicException
      *
      */
-    public function renew()
+    public function renew(): static
     {
         if ($this->ended() && $this->canceled()) {
             throw new LogicException('Unable to renew canceled ended subscription.');
@@ -343,7 +343,7 @@ class PlanSubscription extends Model
      */
     public function canceled(): bool
     {
-        return $this->canceled_at ? Carbon::now()->gte($this->canceled_at) : false;
+        return $this->canceled_at && Carbon::now()->gte($this->canceled_at);
     }
 
     /**
@@ -432,7 +432,7 @@ class PlanSubscription extends Model
      *
      * @param string $featureSlug
      * @param int $uses
-     *
+     * @param bool $incremental
      * @return PlanSubscriptionUsage
      */
     public function recordFeatureUsage(string $featureSlug, int $uses = 1, bool $incremental = true): PlanSubscriptionUsage

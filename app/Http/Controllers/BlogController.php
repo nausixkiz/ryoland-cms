@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Constants\StatusConst;
+use App\Http\Requests\Blog\CreateNewBlogRequest;
+use App\Http\Requests\Blog\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Models\Category;
 use Exception;
@@ -23,7 +25,7 @@ use function view;
 
 class BlogController extends Controller
 {
-    protected $indexRoute = 'blogs.index';
+    protected string $indexRoute = 'blogs.index';
 
     /**
      * Display a listing of the resource.
@@ -51,9 +53,9 @@ class BlogController extends Controller
     public function create(): Factory|View|Application
     {
         $breadcrumbs = [
-            ['link' => route('home'), 'name' => "Home",],
-            ['link' => route('blogs.index'), 'name' => "Blogs",],
-            ['name' => "Create New Blog",],
+            ['link' => route('home'), 'name' => __('Home')],
+            ['link' => route($this->indexRoute), 'name' => __('Blogs')],
+            ['name' => __('Create New Blog')],
         ];
 
         return view('contents.blog.create', [
@@ -65,22 +67,11 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param CreateNewBlogRequest $request
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(CreateNewBlogRequest $request): RedirectResponse
     {
-        Validator::make($request->all(), [
-            'name' => ['required', 'string', 'min:6', 'max:100'],
-            'description' => ['required', 'string', 'min:6', 'max:255'],
-            'contents' => ['required', 'string'],
-            'status' => ['required', 'string', Rule::in(StatusConst::LIST_STATUS)],
-            'category' => ['required'],
-            'thumbnail' => ['required', 'image', 'mimes:jpg,jpeg,png,bmp'],
-            'tags' => ['required', 'string'],
-        ])->validate();
-
         try {
             $user = Auth::user();
             $category = Category::findBySlugOrFail($request->input('category'));
@@ -115,7 +106,7 @@ class BlogController extends Controller
      * @param string $slug
      * @return Application|Factory|View
      */
-    public function edit(string $slug)
+    public function edit(string $slug): View|Factory|Application
     {
         $breadcrumbs = [
             ['link' => route('home'), 'name' => __('Home')],
@@ -143,23 +134,12 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param UpdateBlogRequest $request
      * @param string $slug
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function update(Request $request, string $slug)
+    public function update(UpdateBlogRequest $request, string $slug): RedirectResponse
     {
-        Validator::make($request->all(), [
-            'name' => ['required', 'string', 'min:6', 'max:100'],
-            'description' => ['required', 'string', 'min:6', 'max:255'],
-            'contents' => ['required', 'string'],
-            'status' => ['required', 'string', Rule::in(StatusConst::LIST_STATUS)],
-            'category' => ['required'],
-            'thumbnail' => ['image', 'mimes:jpg,jpeg,png,bmp'],
-            'tags' => ['required', 'string'],
-        ])->validate();
-
         try {
             $blog = Blog::findBySlugOrFail($slug);
             $category = Category::findBySlugOrFail($request->input('category'));
@@ -188,7 +168,7 @@ class BlogController extends Controller
             Session::flash('toastr-error-message', 'Something went wrong');
         }
 
-        return redirect()->route('blogs.index');
+        return redirect()->route($this->indexRoute);
     }
 
     /**
@@ -197,7 +177,7 @@ class BlogController extends Controller
      * @param string $slug
      * @return RedirectResponse
      */
-    public function destroy(string $slug)
+    public function destroy(string $slug): RedirectResponse
     {
         try {
             $blog = Blog::findBySlugOrFail($slug);
@@ -207,6 +187,6 @@ class BlogController extends Controller
             Session::flash('toastr-error-message', $e->getMessage());
         }
 
-        return back();
+        return redirect()->route($this->indexRoute);
     }
 }

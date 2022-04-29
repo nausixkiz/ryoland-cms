@@ -45,7 +45,7 @@ class UpdateCurrency extends Command
      *
      * @return bool
      */
-    public function handle()
+    public function handle(): bool
     {
         // Get Settings
         $defaultCurrency = $this->currency->config('default');
@@ -83,7 +83,7 @@ class UpdateCurrency extends Command
 
         $this->currency->clearCache();
 
-        $this->info('Update!');
+        $this->info('Updated!');
 
         return !0;
     }

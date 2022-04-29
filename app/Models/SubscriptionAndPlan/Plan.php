@@ -79,7 +79,7 @@ class Plan extends Model implements Sortable
      *
      * @var array
      */
-    public $translatable = [
+    public array $translatable = [
         'name',
         'description',
     ];
@@ -262,7 +262,7 @@ class Plan extends Model implements Sortable
      *
      * @return $this
      */
-    public function activate()
+    public function activate(): static
     {
         $this->update(['is_active' => true]);
 
@@ -274,7 +274,7 @@ class Plan extends Model implements Sortable
      *
      * @return $this
      */
-    public function deactivate()
+    public function deactivate(): static
     {
         $this->update(['is_active' => false]);
 

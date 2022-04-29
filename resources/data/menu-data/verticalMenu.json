@@ -35,7 +35,7 @@
             "url": "real-estate/consults",
             "name": "Consults",
             "icon": "message-circle",
-            "slug": "consults"
+            "slug": "real-estate/consults"
         },
         {
             "name": "Locations",
