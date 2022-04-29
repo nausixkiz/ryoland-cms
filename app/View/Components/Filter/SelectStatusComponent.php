@@ -4,6 +4,7 @@ namespace App\View\Components\Filter;
 
 use App\Constants\RealEstateStatus;
 use App\Constants\StatusConst;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class SelectStatusComponent extends Component
@@ -26,7 +27,7 @@ class SelectStatusComponent extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
      */
     public function render()
     {
