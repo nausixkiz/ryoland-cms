@@ -77,7 +77,7 @@ trait HasPlanSubscriptions
     {
         $planIds = $this->planSubscriptions->reject->inactive()->pluck('plan_id')->unique();
 
-        return app('rinvex.subscriptions.plan')->whereIn('id', $planIds)->get();
+        return $this->whereIn('id', $planIds)->get();
     }
 
     /**
